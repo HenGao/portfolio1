@@ -4,90 +4,67 @@
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .project-card {
-  background: white;
-  border-radius: 12px;
+  background: var(--bg-primary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: block;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(30, 45, 36, 0.1);
+  border-color: var(--primary-color);
 }
 
 .project-image {
   width: 100%;
-  height: 200px;
+  height: 250px;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: var(--bg-secondary);
 }
 
-.project-placeholder {
+.project-image-placeholder {
   width: 100%;
   height: 100%;
 }
 
-.project-placeholder svg {
+.project-image-placeholder svg {
   width: 100%;
   height: 100%;
 }
 
-.project-content {
+.project-card-content {
   padding: 1.5rem;
 }
 
 .project-title {
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 0.75rem;
-  color: var(--text-primary);
-}
-
-.project-description {
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
-  line-height: 1.6;
-}
-
-.project-tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.tech-badge {
-  padding: 0.25rem 0.75rem;
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-
-.project-links {
-  margin-top: 1rem;
+  color: var(--primary-color);
 }
 
 .project-link {
-  color: var(--primary-color);
-  font-weight: 600;
+  color: var(--secondary-color);
+  font-weight: 500;
+  text-decoration: none;
   transition: color 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  display: inline-block;
 }
 
-.project-link:hover {
-  color: var(--secondary-color);
+.project-card:hover .project-link {
+  color: var(--primary-color);
 }
 
 @media (max-width: 768px) {

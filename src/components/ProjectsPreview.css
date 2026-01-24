@@ -1,0 +1,132 @@
+.projects-preview {
+  background: var(--bg-primary);
+  padding: 40px 0 60px 0;
+  width: 100%;
+}
+
+.projects-preview-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.projects-scroll {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem 0 2rem 0;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 100%;
+}
+
+.projects-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: var(--bg-primary);
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(30, 45, 36, 0.15);
+}
+
+.scroll-arrow:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(30, 45, 36, 0.25);
+}
+
+.scroll-arrow-left {
+  left: 20px;
+}
+
+.scroll-arrow-right {
+  right: 20px;
+}
+
+.project-preview-card {
+  flex: 0 0 350px;
+  background: var(--bg-primary);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.project-preview-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(30, 45, 36, 0.15);
+  border-color: var(--primary-color);
+}
+
+.project-preview-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.project-image-placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.project-image-placeholder svg {
+  width: 100%;
+  height: 100%;
+}
+
+.project-preview-title {
+  padding: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .projects-preview {
+    padding: 30px 0 40px 0;
+  }
+
+  .scroll-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .scroll-arrow-left {
+    left: 10px;
+  }
+
+  .scroll-arrow-right {
+    right: 10px;
+  }
+
+  .project-preview-card {
+    flex: 0 0 280px;
+  }
+
+  .project-preview-image {
+    height: 200px;
+  }
+}

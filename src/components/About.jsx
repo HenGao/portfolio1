@@ -5,9 +5,9 @@ const About = () => {
   return (
     <section id="about" className="about section">
       <div className="container">
-        <h2 className="section-title">About Me</h2>
         <div className="about-content">
           <div className="about-text">
+            <h2 className="about-title">More About Me</h2>
             <p className="about-paragraph">
               I'm a passionate developer with a love for creating innovative solutions
               and beautiful user experiences. With expertise in modern web technologies,
@@ -16,21 +16,12 @@ const About = () => {
             <p className="about-paragraph">
               When I'm not coding, you can find me exploring new technologies, contributing
               to open-source projects, or sharing knowledge with the developer community.
+              I believe in continuous learning and staying updated with the latest industry trends.
             </p>
-            <div className="about-stats">
-              <div className="stat-item">
-                <div className="stat-number">50+</div>
-                <div className="stat-label">Projects</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-number">3+</div>
-                <div className="stat-label">Years Experience</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-number">100+</div>
-                <div className="stat-label">Happy Clients</div>
-              </div>
-            </div>
+            <p className="about-paragraph">
+              My approach to development combines technical excellence with user-centered design,
+              ensuring that every project I work on is both functional and delightful to use.
+            </p>
           </div>
         </div>
       </div>

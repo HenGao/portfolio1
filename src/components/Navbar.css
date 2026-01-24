@@ -4,30 +4,56 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   padding: 1rem 0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 20px rgba(30, 45, 36, 0.1);
 }
 
 .navbar-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  position: absolute;
+  right: 0;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.social-link {
+  color: var(--text-primary);
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-link:hover {
+  color: var(--primary-color);
+  transform: translateY(-2px);
 }
 
 .logo {
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary-color);
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -84,8 +110,21 @@
 }
 
 @media (max-width: 768px) {
+  .navbar-content {
+    justify-content: space-between;
+  }
+
   .mobile-menu-toggle {
     display: flex;
+  }
+
+  .social-links {
+    display: none;
+  }
+
+  .navbar-right {
+    position: static;
+    gap: 1rem;
   }
 
   .nav-links {
@@ -93,11 +132,12 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: white;
+    background: var(--bg-primary);
     flex-direction: column;
     padding: 2rem;
     gap: 1.5rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(30, 45, 36, 0.1);
+    border-top: 1px solid var(--border-color);
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;

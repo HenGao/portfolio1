@@ -1,0 +1,33 @@
+.resume {
+  background: var(--bg-primary);
+  text-align: center;
+}
+
+.resume-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.resume-description {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+.resume .btn {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  background: var(--primary-color);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.resume .btn:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+}

@@ -1,22 +1,29 @@
 import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Hero from './components/Hero'
-import About from './components/About'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Contact from './components/Contact'
 import Navbar from './components/Navbar'
+import ProjectsPreview from './components/ProjectsPreview'
+import ProjectsPage from './pages/ProjectsPage'
+import ResumePage from './pages/ResumePage'
+import ProjectDetailPage from './pages/ProjectDetailPage'
 import './App.css'
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={
+          <div className="App">
+            <Navbar />
+            <Hero />
+            <ProjectsPreview />
+          </div>
+        } />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/projects/:projectId" element={<ProjectDetailPage />} />
+        <Route path="/resume" element={<ResumePage />} />
+      </Routes>
+    </Router>
   )
 }
 
