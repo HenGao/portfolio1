@@ -1,4 +1,4 @@
-Plaimport React from 'react'
+import React from 'react'
 import Resume from '../components/Resume'
 import Navbar from '../components/Navbar'
 import './Page.css'
