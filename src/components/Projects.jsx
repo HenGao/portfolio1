@@ -12,14 +12,18 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Link key={index} to={project.link} className="project-card">
               <div className="project-image">
-                <div className="project-image-placeholder">
-                  <svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="600" height="400" fill="#f3f4f6"/>
-                    <text x="300" y="200" fontSize="20" fill="#334139" textAnchor="middle" fontWeight="500">
-                      {project.title}
-                    </text>
-                  </svg>
-                </div>
+                {project.image && !project.image.includes('placeholder') ? (
+                  <img src={project.image} alt={project.title} className="project-card-img" />
+                ) : (
+                  <div className="project-image-placeholder">
+                    <svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="600" height="400" fill="#f3f4f6"/>
+                      <text x="300" y="200" fontSize="20" fill="#334139" textAnchor="middle" fontWeight="500">
+                        {project.title}
+                      </text>
+                    </svg>
+                  </div>
+                )}
               </div>
               <div className="project-card-content">
                 <h3 className="project-title">{project.title}</h3>

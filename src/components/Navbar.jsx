@@ -25,8 +25,8 @@ const Navbar = () => {
         <div className="navbar-content">
           <div className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
             <Link to="/" onClick={closeMobileMenu}>Home</Link>
-            <Link to="/resume" onClick={closeMobileMenu}>Resume</Link>
             <Link to="/projects" onClick={closeMobileMenu}>Projects</Link>
+            <Link to="/resume" onClick={closeMobileMenu}>Resume</Link>
           </div>
           <div className="navbar-right">
             <div className="social-links">

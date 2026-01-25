@@ -1,5 +1,5 @@
 .hero {
-  min-height: auto;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   padding-top: 100px;
@@ -73,7 +73,7 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .hero-actions .btn {

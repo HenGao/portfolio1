@@ -30,6 +30,10 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(30, 45, 36, 0.1);
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .project-image-placeholder {
@@ -42,6 +46,14 @@
   height: 100%;
 }
 
+.project-main-image {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+  display: block;
+}
+
 .project-detail-content {
   max-width: 800px;
 }
@@ -51,6 +63,34 @@
   color: var(--text-secondary);
   line-height: 1.8;
   margin-bottom: 1.5rem;
+}
+
+.project-section {
+  margin-bottom: 2.5rem;
+}
+
+.project-section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.project-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.tech-badge {
+  padding: 0.5rem 1rem;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
 }
 
 .project-not-found {

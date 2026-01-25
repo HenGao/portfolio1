@@ -62,14 +62,18 @@ const ProjectsPreview = () => {
               className="project-preview-card"
             >
               <div className="project-preview-image">
-                <div className="project-image-placeholder">
-                  <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="400" height="300" fill="#f3f4f6"/>
-                    <text x="200" y="150" fontSize="18" fill="#334139" textAnchor="middle" fontWeight="500">
-                      {project.title}
-                    </text>
-                  </svg>
-                </div>
+                {project.image && !project.image.includes('placeholder') ? (
+                  <img src={project.image} alt={project.title} className="project-preview-img" />
+                ) : (
+                  <div className="project-image-placeholder">
+                    <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="400" height="300" fill="#f3f4f6"/>
+                      <text x="200" y="150" fontSize="18" fill="#334139" textAnchor="middle" fontWeight="500">
+                        {project.title}
+                      </text>
+                    </svg>
+                  </div>
+                )}
               </div>
               <h3 className="project-preview-title">{project.title}</h3>
             </Link>
