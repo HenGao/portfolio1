@@ -1,16 +1,18 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Hero from './components/Hero'
 import Navbar from './components/Navbar'
+import Hero from './components/Hero'
 import ProjectsPreview from './components/ProjectsPreview'
 import ProjectsPage from './pages/ProjectsPage'
 import ResumePage from './pages/ResumePage'
 import ProjectDetailPage from './pages/ProjectDetailPage'
+import ScrollToTop from './components/ScrollToTop'
 import './App.css'
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={
           <div className="App">
