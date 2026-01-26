@@ -21,17 +21,29 @@
   font-size: 2.5rem;
   color: var(--primary-color);
   margin-bottom: 2rem;
+  margin-left: -60px;
+  padding-left: 60px;
+}
+
+.project-images-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  margin-left: -60px;
+  padding-left: 0;
+  width: calc(100% + 120px);
 }
 
 .project-main-image-container {
   width: 100%;
-  margin-bottom: 2rem;
-  background: var(--bg-secondary);
+  background: #ffffff;
   border-radius: 8px;
   padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 0;
 }
 
 .project-main-image {
@@ -40,6 +52,26 @@
   max-height: 600px;
   object-fit: contain;
   border-radius: 4px;
+}
+
+.clickable-image {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.clickable-image:hover {
+  opacity: 0.9;
+}
+
+.project-slider-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-summary-section {
+  margin-bottom: 3rem;
 }
 
 .project-main-image-placeholder {
@@ -56,11 +88,45 @@
 }
 
 
+.project-description-item {
+  margin-bottom: 2rem;
+}
+
+.project-description-item:last-child {
+  margin-bottom: 0;
+}
+
+.project-description-label {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
 .project-full-description {
   font-size: 1.125rem;
   line-height: 1.8;
   color: var(--text-primary);
-  margin-bottom: 3rem;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.project-description-list {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  padding-left: 1.5rem;
+}
+
+.project-description-list li {
+  margin-bottom: 0.5rem;
+}
+
+.project-description-list li:last-child {
+  margin-bottom: 0;
 }
 
 .project-sections-grid {
@@ -84,12 +150,32 @@
 .mechanical-gif-container {
   width: 100%;
   margin-bottom: 1.5rem;
-  background: var(--bg-secondary);
+  background: #ffffff;
   border-radius: 8px;
   padding: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.electrical-schematic-container {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.electrical-schematic {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 4px;
+  display: block;
 }
 
 .mechanical-gif {
@@ -133,14 +219,24 @@
   font-weight: 500;
 }
 
+.firmware-download-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
 .firmware-download-link {
   display: inline-block;
-  margin-top: 1rem;
   text-decoration: none;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
+  .project-images-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
   .project-sections-grid {
     grid-template-columns: 1fr;
     gap: 2rem;

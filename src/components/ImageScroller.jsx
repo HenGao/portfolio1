@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './ImageScroller.css'
 
-const ImageScroller = ({ items }) => {
+const ImageScroller = ({ items, onImageClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   if (!items || items.length === 0) return null
@@ -53,7 +53,8 @@ const ImageScroller = ({ items }) => {
               <img 
                 src={src} 
                 alt={`Image ${currentIndex + 1}`}
-                className="scroller-media"
+                className="scroller-media clickable-image"
+                onClick={() => onImageClick && onImageClick(src, `Image ${currentIndex + 1}`)}
               />
             </div>
           )}

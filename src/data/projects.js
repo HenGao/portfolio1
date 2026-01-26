@@ -10,8 +10,11 @@ export const projects = [
       '/mira-smart-mirror-3.png'
     ],
     mechanicalGif: '/mira-wiping-demo.mp4',
+    electricalSchematic: '/mira-schematic.png',
     description: 'Team lead for this project developed for the Forge 2025 Fall Showcase',
-    fullDescription: 'As the team lead of 6 engineers, we developed the MIRA Smart Mirror system for the Forge 2025 Fall Showcase. This innovative smart mirror integrates advanced mechanics and electronics to create a functional, intelligent bathroom mirror with defogging, environmental monitoring, hairblowing, and cleaning capabilities.',
+    fullDescription: 'As the team lead of 6 engineers, we developed the MIRA Smart Mirror system to address the market need for a solution to common bathroom problems that plague us every day. This innovative smart mirror integrates advanced mechanics and electronics to create a functional, intelligent bathroom mirror with defogging, environmental monitoring, hairblowing, and cleaning capabilities.',
+    how: ['Utilizes a ESP32 MCU to read and process sensor data VIA SPI bus', 'Calls a weather api to display enviromental data about your location ("Weather, time, temperature, etc.)', 'Used SOLIDWORKs Flow simulation to design the most efficient wind channel for blowing hair'],
+    results: 'Successfully developed a smart mirror that cleans itself, blows your hair, and displays enviromental data about your location. Pitched MIRA Smart Mirror at the Forge 2025 Fall Showcase, receiving positive feedback from judges and attendees.',
     technologies: [
       'ESP32', 'Linear Actuator', 'Stepper Motors', 'Relays', 'Buck Converters',
       'Temperature Sensor', 'Humidity Sensor', '3D Printing', 'Arduino', 'C++', '3D Modeling'

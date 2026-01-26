@@ -46,6 +46,15 @@
   display: block;
 }
 
+.scroller-media.clickable-image {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.scroller-media.clickable-image:hover {
+  opacity: 0.9;
+}
+
 .scroller-arrow {
   position: absolute;
   top: 50%;
