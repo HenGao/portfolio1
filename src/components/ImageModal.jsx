@@ -27,6 +27,8 @@ const ImageModal = ({ imageSrc, alt, isOpen, onClose }) => {
 
   if (!isOpen || !imageSrc) return null
 
+  const isVideo = imageSrc.endsWith('.mp4') || imageSrc.endsWith('.MP4') || imageSrc.endsWith('.webm') || imageSrc.endsWith('.WEBM')
+
   return (
     <div className="image-modal-overlay" onClick={onClose}>
       <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
@@ -35,7 +37,20 @@ const ImageModal = ({ imageSrc, alt, isOpen, onClose }) => {
             <path d="M18 6L6 18M6 6l12 12"/>
           </svg>
         </button>
-        <img src={imageSrc} alt={alt || 'Expanded view'} className="image-modal-image" />
+        {isVideo ? (
+          <video 
+            src={imageSrc} 
+            className="image-modal-image"
+            controls
+            autoPlay
+            loop
+            playsInline
+          >
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <img src={imageSrc} alt={alt || 'Expanded view'} className="image-modal-image" />
+        )}
       </div>
     </div>
   )

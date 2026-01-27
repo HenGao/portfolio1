@@ -58,8 +58,38 @@ const ProjectDetailPage = () => {
               </div>
             )}
 
-            {project.additionalImages && project.additionalImages.length > 0 && (
-              <div className="project-slider-container">
+            <div className="project-slider-container">
+              {(project.pcbImage || project.pcbImage2) && (
+                <div className="project-pcb-images-wrapper">
+                  {project.pcbImage && (
+                    <div className="project-pcb-image-container">
+                      <img 
+                        src={project.pcbImage} 
+                        alt="PCB Design" 
+                        className="project-pcb-image clickable-image"
+                        onClick={() => {
+                          setModalImage(project.pcbImage)
+                          setModalAlt('PCB Design')
+                        }}
+                      />
+                    </div>
+                  )}
+                  {project.pcbImage2 && (
+                    <div className="project-pcb-image-container">
+                      <img 
+                        src={project.pcbImage2} 
+                        alt="PCB Design 2" 
+                        className="project-pcb-image clickable-image"
+                        onClick={() => {
+                          setModalImage(project.pcbImage2)
+                          setModalAlt('PCB Design 2')
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+              {project.additionalImages && project.additionalImages.length > 0 && (
                 <ImageScroller 
                   items={project.additionalImages} 
                   onImageClick={(src, alt) => {
@@ -67,8 +97,8 @@ const ProjectDetailPage = () => {
                     setModalAlt(alt)
                   }}
                 />
-              </div>
-            )}
+              )}
+            </div>
           </div>
 
           {project.fullDescription && (

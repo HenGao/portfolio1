@@ -127,6 +127,10 @@
     gap: 1rem;
   }
 
+  .social-links {
+    display: none;
+  }
+
   .nav-links {
     position: absolute;
     top: 100%;

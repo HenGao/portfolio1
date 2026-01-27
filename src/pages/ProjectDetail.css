@@ -66,8 +66,37 @@
 .project-slider-container {
   width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.project-pcb-images-wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.project-pcb-image-container {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 0.75rem;
+  display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.project-pcb-image {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 4px;
+  display: block;
 }
 
 .project-summary-section {
@@ -248,5 +277,10 @@
 
   .project-full-description {
     font-size: 1rem;
+  }
+
+  .project-pcb-images-wrapper {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
