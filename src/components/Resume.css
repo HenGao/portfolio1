@@ -1,11 +1,29 @@
 .resume {
   background: var(--bg-primary);
   text-align: center;
+  padding: 2rem 0;
 }
 
 .resume-content {
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto;
+}
+
+.resume-pdf-container {
+  width: 100%;
+  height: 800px;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(30, 45, 36, 0.1);
+  background: #ffffff;
+}
+
+.resume-pdf {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 .resume-description {
@@ -30,4 +48,10 @@
 .resume .btn:hover {
   background: var(--secondary-color);
   transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .resume-pdf-container {
+    height: 600px;
+  }
 }

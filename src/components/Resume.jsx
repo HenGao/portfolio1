@@ -7,10 +7,23 @@ const Resume = () => {
       <div className="container">
         <h2 className="section-title">Resume</h2>
         <div className="resume-content">
-          <p className="resume-description">
-            Download my resume to learn more about my experience and skills.
-          </p>
-          <a href="#" className="btn btn-primary" download>
+          <div className="resume-pdf-container">
+            <iframe 
+              src="/resume.pdf" 
+              className="resume-pdf"
+              title="Resume PDF"
+              type="application/pdf"
+            >
+              <p>Your browser does not support PDFs. 
+                <a href="/resume.pdf" download="HGAO_Resume_2026-2027.pdf">Download the resume</a> instead.
+              </p>
+            </iframe>
+          </div>
+          <a 
+            href="/resume.pdf" 
+            className="btn btn-primary" 
+            download="HGAO_Resume_2026-2027.pdf"
+          >
             Download Resume
           </a>
         </div>
