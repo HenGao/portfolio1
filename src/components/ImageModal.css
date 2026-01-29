@@ -21,6 +21,12 @@
   align-items: center;
   justify-content: center;
   cursor: default;
+  overflow: visible;
+}
+
+.image-wrapper {
+  position: relative;
+  display: inline-block;
 }
 
 .image-modal-image {
@@ -28,6 +34,10 @@
   max-height: 90vh;
   object-fit: contain;
   border-radius: 8px;
+}
+
+.zoomable-image {
+  user-select: none;
 }
 
 .image-modal-content video {
@@ -39,10 +49,10 @@
 
 .image-modal-close {
   position: absolute;
-  top: -40px;
-  right: 0;
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -53,6 +63,7 @@
   transition: all 0.3s ease;
   color: var(--primary-color);
   z-index: 1001;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .image-modal-close:hover {
@@ -67,7 +78,8 @@
   }
 
   .image-modal-close {
-    top: -35px;
+    top: 8px;
+    right: 8px;
     width: 35px;
     height: 35px;
   }
