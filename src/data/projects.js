@@ -206,10 +206,22 @@ export const projects = [
   },
   {
     id: 'project-ten',
-    title: 'Project Ten',
+    title: 'Power Cone',
     link: '/projects/project-ten',
-    image: '/placeholder-project.png',
-    description: 'Description for project ten'
+    image: '/powercone.png',
+    additionalImages: [],
+    description: 'Made for a Fiverr client from Finland',
+    fullDescription: 'Made for a Fiverr client from Finland.',
+    how: [],
+    results: '',
+    technologies: [],
+    mechanical: '',
+    electrical: '',
+    firmware: {
+      description: '',
+      downloadLink: '',
+      fileName: ''
+    }
   }
 ]
 
