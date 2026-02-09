@@ -35,6 +35,10 @@
   width: calc(100% + 120px);
 }
 
+.project-images-layout--single {
+  grid-template-columns: 1fr;
+}
+
 .project-main-image-container {
   width: 100%;
   background: #ffffff;
@@ -72,6 +76,25 @@
   gap: 2rem;
 }
 
+.project-slider-container--single-image {
+  justify-content: center;
+}
+
+.project-hero-video-container {
+  width: 100%;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.project-hero-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+}
+
 .project-pcb-images-wrapper {
   width: 100%;
   display: grid;
@@ -101,6 +124,23 @@
 
 .project-summary-section {
   margin-bottom: 3rem;
+}
+
+.project-summary-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.project-summary-row .project-description-item {
+  margin-bottom: 0;
+}
+
+.project-summary-row .project-description-item--electrical .project-full-description {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-primary);
 }
 
 .project-main-image-placeholder {
@@ -158,11 +198,70 @@
   margin-bottom: 0;
 }
 
+.contributions-image-container {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.contributions-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+
 .project-sections-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   margin-bottom: 3rem;
+}
+
+.project-sections-grid--electrical-only {
+  grid-template-columns: 1fr;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project-sections-grid--electrical-only .project-section {
+  text-align: left;
+}
+
+.project-sections-grid--electrical-only .project-section-electrical-p {
+  text-align: left;
+}
+
+.project-section-electrical-with-image {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.project-section-electrical-with-image .electrical-text-wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.project-section-electrical-with-image .electrical-schematic-container {
+  flex: 1;
+  margin-bottom: 0;
+  min-width: 0;
+}
+
+.project-sections-grid--electrical-only .electrical-schematic-container {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .project-section {
@@ -178,6 +277,7 @@
 
 .mechanical-gif-container {
   width: 100%;
+  height: 260px;
   margin-bottom: 1.5rem;
   background: #ffffff;
   border-radius: 8px;
@@ -189,6 +289,7 @@
 
 .electrical-schematic-container {
   width: 100%;
+  height: 380px;
   margin-bottom: 1.5rem;
   background: #ffffff;
   border-radius: 8px;
@@ -200,8 +301,8 @@
 
 .electrical-schematic {
   width: 100%;
-  height: auto;
-  max-height: 300px;
+  height: 100%;
+  max-height: 380px;
   object-fit: contain;
   border-radius: 4px;
   display: block;
@@ -209,8 +310,8 @@
 
 .mechanical-gif {
   width: 100%;
-  height: auto;
-  max-height: 300px;
+  height: 100%;
+  max-height: 260px;
   object-fit: contain;
   border-radius: 4px;
   display: block;
@@ -218,8 +319,8 @@
 
 .mechanical-gif-container video {
   width: 100%;
-  height: auto;
-  max-height: 300px;
+  height: 100%;
+  max-height: 260px;
   object-fit: contain;
   border-radius: 4px;
   display: block;
@@ -248,13 +349,16 @@
   font-weight: 500;
 }
 
-.firmware-download-container {
+.firmware-links-container {
   display: flex;
   justify-content: center;
+  gap: 1rem;
   margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
-.firmware-download-link {
+.firmware-download-link,
+.firmware-github-link {
   display: inline-block;
   text-decoration: none;
 }
@@ -266,9 +370,21 @@
     gap: 2rem;
   }
 
+  .project-summary-row {
+    grid-template-columns: 1fr;
+  }
+
   .project-sections-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .project-section-electrical-with-image {
+    flex-direction: column;
+  }
+
+  .project-section-electrical-with-image .electrical-schematic-container {
+    margin-bottom: 1.5rem;
   }
 
   .project-detail-title {

@@ -22,18 +22,22 @@ const ImageScroller = ({ items, onImageClick }) => {
   const isVideo = typeof currentItem === 'object' && currentItem.type === 'video'
   const src = isVideo ? currentItem.src : currentItem
 
+  const showArrows = items.length > 1
+
   return (
-    <div className="image-scroller">
+    <div className={`image-scroller${items.length === 1 ? ' image-scroller--single' : ''}`}>
       <div className="scroller-wrapper">
-        <button 
-          className="scroller-arrow scroller-arrow-left"
-          onClick={goToPrevious}
-          aria-label="Previous image"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M15 18l-6-6 6-6"/>
-          </svg>
-        </button>
+        {showArrows && (
+          <button 
+            className="scroller-arrow scroller-arrow-left"
+            onClick={goToPrevious}
+            aria-label="Previous image"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+        )}
 
         <div className="scroller-content">
           {isVideo ? (
@@ -60,15 +64,17 @@ const ImageScroller = ({ items, onImageClick }) => {
           )}
         </div>
 
-        <button 
-          className="scroller-arrow scroller-arrow-right"
-          onClick={goToNext}
-          aria-label="Next image"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M9 18l6-6-6-6"/>
-          </svg>
-        </button>
+        {showArrows && (
+          <button 
+            className="scroller-arrow scroller-arrow-right"
+            onClick={goToNext}
+            aria-label="Next image"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        )}
       </div>
 
       {items.length > 1 && (

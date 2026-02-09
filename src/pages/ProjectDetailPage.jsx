@@ -7,6 +7,15 @@ import ImageModal from '../components/ImageModal'
 import './Page.css'
 import './ProjectDetail.css'
 
+const getYouTubeEmbedUrl = (url) => {
+  if (!url || typeof url !== 'string') return url
+  const shortsMatch = url.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/)
+  if (shortsMatch) return `https://www.youtube.com/embed/${shortsMatch[1]}?autoplay=0`
+  const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]+)/)
+  if (watchMatch) return `https://www.youtube.com/embed/${watchMatch[1]}?autoplay=0`
+  return url.replace('watch?v=', 'embed/') + (url.includes('embed/') ? '' : '?autoplay=0')
+}
+
 const ProjectDetailPage = () => {
   const { projectId } = useParams()
   const project = getProjectById(projectId)
@@ -34,7 +43,7 @@ const ProjectDetailPage = () => {
           
           <h1 className="project-detail-title">{project.title}</h1>
           
-          <div className="project-images-layout">
+          <div className={`project-images-layout${project.centerMainImage ? ' project-images-layout--single' : ''}`}>
             {project.image && !project.image.includes('placeholder') ? (
               <div className="project-main-image-container">
                 <img 
@@ -58,7 +67,19 @@ const ProjectDetailPage = () => {
               </div>
             )}
 
-            <div className="project-slider-container">
+            {!project.centerMainImage && (
+            <div className={`project-slider-container${!project.heroVideo && !(project.pcbImage || project.pcbImage2) && project.additionalImages && project.additionalImages.length === 1 ? ' project-slider-container--single-image' : ''}`}>
+              {project.heroVideo && (
+                <div className="project-hero-video-container">
+                  <iframe
+                    title="Project video"
+                    src={getYouTubeEmbedUrl(project.heroVideo)}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="project-hero-video"
+                  />
+                </div>
+              )}
               {(project.pcbImage || project.pcbImage2) && (
                 <div className="project-pcb-images-wrapper">
                   {project.pcbImage && (
@@ -99,15 +120,37 @@ const ProjectDetailPage = () => {
                 />
               )}
             </div>
+            )}
           </div>
 
           {project.fullDescription && (
             <div className="project-summary-section">
-              <div className="project-description-item">
-                <strong className="project-description-label">Context:</strong>
-                <p className="project-full-description">{project.fullDescription}</p>
+              <div className={project.contextElectricalSideBySide ? 'project-summary-row' : ''}>
+                <div className="project-description-item">
+                  <strong className="project-description-label">Context:</strong>
+                  <p className="project-full-description">{project.fullDescription}</p>
+                  {project.userGuideVideo && (
+                    <div className="user-guide-video-container" style={{ marginTop: '1rem' }}>
+                      <strong style={{ display: 'block', marginBottom: '0.5rem' }}>User Guide I Developed:</strong>
+                      <a 
+                        href={project.userGuideVideo} 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="user-guide-video-link btn btn-secondary"
+                      >
+                        Watch User Guide Video
+                      </a>
+                    </div>
+                  )}
+                </div>
+                {project.contextElectricalSideBySide && project.electrical && (
+                  <div className="project-description-item project-description-item--electrical">
+                    <strong className="project-description-label">Electrical:</strong>
+                    <p className="project-full-description" dangerouslySetInnerHTML={{ __html: project.electrical }} />
+                  </div>
+                )}
               </div>
-              {project.how && (
+              {project.how && (Array.isArray(project.how) ? project.how.length > 0 : project.how) && (
                 <div className="project-description-item">
                   <strong className="project-description-label">How:</strong>
                   {Array.isArray(project.how) ? (
@@ -123,7 +166,7 @@ const ProjectDetailPage = () => {
               )}
               {project.results && (
                 <div className="project-description-item">
-                  <strong className="project-description-label">Results:</strong>
+                  <strong className="project-description-label">My Contributions:</strong>
                   {Array.isArray(project.results) ? (
                     <ul className="project-description-list">
                       {project.results.map((item, index) => (
@@ -131,7 +174,25 @@ const ProjectDetailPage = () => {
                       ))}
                     </ul>
                   ) : (
-                    <p className="project-full-description">{project.results}</p>
+                    <p className="project-full-description" dangerouslySetInnerHTML={{
+                      __html: project.results.replace(
+                        /reads the analog signal from a pH sensor, filters it, and sends it back to our MCU via SPI protocol/g,
+                        '<strong>reads the analog signal from a pH sensor, filters it, and sends it back to our MCU via SPI protocol</strong>'
+                      )
+                    }}></p>
+                  )}
+                  {project.contributionsImage && (
+                    <div className="contributions-image-container" style={{ marginTop: '1rem' }}>
+                      <img 
+                        src={project.contributionsImage} 
+                        alt="Contributions schematic" 
+                        className="contributions-image clickable-image"
+                        onClick={() => {
+                          setModalImage(project.contributionsImage)
+                          setModalAlt('Contributions schematic')
+                        }}
+                      />
+                    </div>
                   )}
                 </div>
               )}
@@ -139,8 +200,8 @@ const ProjectDetailPage = () => {
           )}
 
           {/* Mechanical and Electrical side by side */}
-          {(project.mechanical || project.electrical) && (
-            <div className="project-sections-grid">
+          {(project.mechanical || (project.electrical && !project.contextElectricalSideBySide)) && (
+            <div className={`project-sections-grid${!project.mechanical && project.electrical ? ' project-sections-grid--electrical-only' : ''}`}>
               {project.mechanical && (
                 <div className="project-section">
                   {project.mechanicalGif && (
@@ -178,7 +239,11 @@ const ProjectDetailPage = () => {
                 </div>
               )}
               {project.electrical && (
-                <div className="project-section">
+                <div className={`project-section${!project.mechanical && project.electricalSchematic ? ' project-section-electrical-with-image' : ''}`}>
+                  <div className="electrical-text-wrapper">
+                    <h2 className="project-section-title">Electrical</h2>
+                    <p className="project-section-electrical-p" dangerouslySetInnerHTML={{ __html: project.electrical }} />
+                  </div>
                   {project.electricalSchematic && (
                     <div className="electrical-schematic-container">
                       <img 
@@ -192,8 +257,6 @@ const ProjectDetailPage = () => {
                       />
                     </div>
                   )}
-                  <h2 className="project-section-title">Electrical</h2>
-                  <p>{project.electrical}</p>
                 </div>
               )}
             </div>
@@ -205,8 +268,8 @@ const ProjectDetailPage = () => {
               {project.firmware.description && (
                 <p>{project.firmware.description}</p>
               )}
-              {project.firmware.downloadLink && (
-                <div className="firmware-download-container">
+              <div className="firmware-links-container">
+                {project.firmware.downloadLink && (
                   <a 
                     href={project.firmware.downloadLink} 
                     download={project.firmware.fileName}
@@ -214,8 +277,18 @@ const ProjectDetailPage = () => {
                   >
                     Download Firmware
                   </a>
-                </div>
-              )}
+                )}
+                {project.firmware.githubLink && (
+                  <a 
+                    href={project.firmware.githubLink} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="firmware-github-link btn btn-secondary"
+                  >
+                    View on GitHub
+                  </a>
+                )}
+              </div>
             </div>
           )}
 

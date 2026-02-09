@@ -18,6 +18,10 @@
   padding: 0 60px;
 }
 
+.image-scroller--single .scroller-wrapper {
+  padding: 0;
+}
+
 .scroller-content {
   width: 100%;
   position: relative;
