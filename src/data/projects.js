@@ -211,6 +211,21 @@ export const projects = [
     mechanical: '',
     electrical: 'Intended to use an ESP32, 433 MHz RF Transmitter, and a multi colored 10 WATT LED. On the power side, power was to come from a 3000 mAh Li-Po battery. This battery was specced as it would give my client up to 15 hours of play time in negative degrees weather.',
     firmware: null
+  },
+  {
+    id: 'project-eleven',
+    title: 'Guinea Pig Transformation',
+    link: '/projects/project-eleven',
+    image: '/guinea-pig-transformation.png',
+    additionalImages: [],
+    description: 'A creative craft project',
+    fullDescription: 'A creative craft project featuring a handcrafted guinea pig figurine on a custom DJ deck–style base.',
+    how: [],
+    results: '',
+    technologies: [],
+    mechanical: '',
+    electrical: '',
+    firmware: null
   }
 ]
 
