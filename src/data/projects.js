@@ -219,7 +219,7 @@ export const projects = [
     image: '/guinea-pig-transformation.png',
     additionalImages: [],
     description: 'A creative craft project',
-    fullDescription: 'A creative craft project featuring a handcrafted guinea pig figurine on a custom DJ deck–style base.',
+    fullDescription: 'Built for my girlfriend\'s 20th birthday. It utilizes a DF mini player that plays a random voice clip when a button is pressed.',
     how: [],
     results: '',
     technologies: [],
