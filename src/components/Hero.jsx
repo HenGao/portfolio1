@@ -20,8 +20,8 @@ const Hero = () => {
               I am currently a fourth year at Northeastern University working towards creating products that will one day change the world. I first started working on hardware + software proudcts since high school, and have been completely hooked on the processing of making. Outside of work, I love to rock climb, snowboard, and paint. Please take a scroll to see how I'm already working towards creating great products!
             </p>
             <div className="hero-actions">
-              <Link to="/projects" className="btn btn-primary">
-                View Projects
+              <Link to="/projects" className="btn btn-primary btn-portfolio">
+                Portfolio
               </Link>
               <Link to="/resume" className="btn btn-secondary">
                 Resume

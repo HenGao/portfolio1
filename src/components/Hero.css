@@ -112,7 +112,18 @@
   color: white;
 }
 
-.hero-actions .btn-primary:hover {
+.hero-actions .btn-portfolio {
+  background: #1A73E8;
+  box-shadow: none;
+}
+
+.hero-actions .btn-portfolio:hover {
+  background: #4a9eff;
+  box-shadow: none;
+  transform: none;
+}
+
+.hero-actions .btn-primary:hover:not(.btn-portfolio) {
   background: var(--secondary-color);
   transform: translateY(-2px);
 }
