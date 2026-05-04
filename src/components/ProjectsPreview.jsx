@@ -1,12 +1,18 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { projects } from '../data/projects'
+import { projects, getProjectType } from '../data/projects'
 import './ProjectsPreview.css'
 
 const ProjectsPreview = () => {
   const scrollRef = useRef(null)
   const [showLeftArrow, setShowLeftArrow] = useState(false)
   const [showRightArrow, setShowRightArrow] = useState(true)
+
+  const getTypeClassName = (type) => {
+    if (type === 'Software') return 'project-preview-type-software'
+    if (type === 'FPGA') return 'project-preview-type-fpga'
+    return 'project-preview-type-hardware'
+  }
 
   const checkScrollButtons = () => {
     if (scrollRef.current) {
@@ -62,6 +68,9 @@ const ProjectsPreview = () => {
               className="project-preview-card"
             >
               <div className="project-preview-image">
+                <span className={`project-preview-type-badge ${getTypeClassName(getProjectType(project.id))}`}>
+                  {getProjectType(project.id)}
+                </span>
                 {project.image && !project.image.includes('placeholder') ? (
                   <img src={project.image} alt={project.title} className="project-preview-img" />
                 ) : (
@@ -75,7 +84,9 @@ const ProjectsPreview = () => {
                   </div>
                 )}
               </div>
-              <h3 className="project-preview-title">{project.title}</h3>
+              <div className="project-preview-content">
+                <h3 className="project-preview-title">{project.title}</h3>
+              </div>
             </Link>
           ))}
         </div>

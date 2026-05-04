@@ -1,9 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { projects } from '../data/projects'
+import { projects, getProjectType } from '../data/projects'
 import './Projects.css'
 
 const Projects = () => {
+  const getTypeClassName = (type) => {
+    if (type === 'Software') return 'project-type-software'
+    if (type === 'FPGA') return 'project-type-fpga'
+    return 'project-type-hardware'
+  }
+
   return (
     <section id="projects" className="projects section">
       <div className="container">
@@ -12,6 +18,9 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Link key={index} to={project.link} className="project-card">
               <div className="project-image">
+                <span className={`project-type-badge ${getTypeClassName(getProjectType(project.id))}`}>
+                  {getProjectType(project.id)}
+                </span>
                 {project.image && !project.image.includes('placeholder') ? (
                   <img src={project.image} alt={project.title} className="project-card-img" />
                 ) : (

@@ -86,6 +86,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .project-preview-img {
@@ -106,12 +107,53 @@
 }
 
 .project-preview-title {
-  padding: 1.5rem;
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--primary-color);
   margin: 0;
   text-align: center;
+}
+
+.project-preview-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.project-preview-type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 14px rgba(25, 35, 30, 0.22);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(2px);
+}
+
+.project-preview-type-hardware {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+.project-preview-type-software {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+
+.project-preview-type-fpga {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
 }
 
 @media (max-width: 768px) {

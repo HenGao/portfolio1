@@ -1,0 +1,29 @@
+<svg width="1400" height="800" viewBox="0 0 1400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1400" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1220"/>
+      <stop offset="1" stop-color="#101A2E"/>
+    </linearGradient>
+    <linearGradient id="line" x1="160" y1="520" x2="1240" y2="260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#34D399"/>
+      <stop offset="1" stop-color="#2DD4BF"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1400" height="800" rx="24" fill="url(#bg)"/>
+
+  <rect x="90" y="90" width="1220" height="620" rx="18" fill="#121C30" stroke="#1E2A44"/>
+
+  <path d="M170 520C260 500 300 420 380 430C470 445 520 520 610 500C700 480 740 410 820 380C930 335 1040 380 1230 260"
+        stroke="url(#line)" stroke-width="10" stroke-linecap="round"/>
+
+  <circle cx="1230" cy="260" r="14" fill="#2DD4BF"/>
+  <circle cx="1230" cy="260" r="26" stroke="#2DD4BF" stroke-opacity="0.25" stroke-width="8"/>
+
+  <text x="700" y="350" text-anchor="middle" fill="#34D399" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="120" font-weight="800">
+    +$12 Profit
+  </text>
+  <text x="700" y="420" text-anchor="middle" fill="#A5B4C8" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="42" font-weight="500">
+    Paper Trading " 1 Day
+  </text>
+</svg>

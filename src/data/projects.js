@@ -1,5 +1,83 @@
 export const projects = [
   {
+    id: 'runna-stick',
+    title: 'Runna Stick',
+    link: '/projects/runna-stick',
+    image: '/placeholder-project.png',
+    description: 'Most recent project.',
+    fullDescription: 'Details coming soon.',
+    how: [],
+    results: '',
+    technologies: [],
+    mechanical: '',
+    electrical: '',
+    firmware: null
+  },
+  {
+    id: 'smart-plug',
+    title: 'Smart Plug',
+    link: '/projects/smart-plug',
+    image: '/smart-plug.png',
+    description: 'Second newest project.',
+    fullDescription: 'Details coming soon.',
+    how: [],
+    results: '',
+    technologies: [],
+    mechanical: '',
+    electrical: '',
+    firmware: null
+  },
+  {
+    id: 'grover',
+    title: 'Growver',
+    link: '/projects/grover',
+    image: '/growver.png',
+    description: 'Third newest project.',
+    fullDescription: 'Details coming soon.',
+    how: [],
+    results: '',
+    technologies: [],
+    mechanical: '',
+    electrical: '',
+    firmware: null
+  },
+  {
+    id: 'fpga-ar',
+    title: 'FPGA AR',
+    link: '/projects/fpga-ar',
+    image: '/fpga-ar.png',
+    description: 'Fourth newest project.',
+    fullDescription: 'Details coming soon.',
+    how: [],
+    results: '',
+    technologies: [],
+    mechanical: '',
+    electrical: '',
+    firmware: null
+  },
+  {
+    id: 'kalshi-bot',
+    title: 'Kalshi bot',
+    link: '/projects/kalshi-bot',
+    image: '/kalshi-bot.png',
+    description: 'ML-assisted BTC prediction market trading system with robust risk controls.',
+    fullDescription: 'Built an end-to-end Python trading system for Kalshi BTC markets that supports simulation, paper trading, and live execution. The bot continuously prices market edge from real-time order books and BTC data, then executes only when expected value clears spread, fee, and confidence filters.',
+    how: [
+      'Engineered a multi-market execution loop for 15-minute, hourly, and daily BTC contracts with automated market discovery and IOC order handling.',
+      'Implemented model-driven fair value estimation using logistic/gradient boosting pipelines with feature engineering from Coinbase candles and Kalshi order book microstructure.',
+      'Built safety infrastructure including stop-loss logic, strategy-gate checks, drawdown kill switch, and per-market state recovery for reliable unattended operation.',
+      'Created observability tooling with JSONL live metrics, dashboard views, and offline evaluation scripts to validate behavior before deployment.'
+    ],
+    results: 'In paper trading, the bot delivered a +$12 profit in a single day while enforcing strict entry filters and risk guardrails.',
+    contributionsImage: '/kalshi-profit-12.svg',
+    technologies: [
+      'Python', 'Pandas', 'NumPy', 'scikit-learn', 'Flask', 'Kalshi API', 'REST APIs', 'Algorithmic Trading'
+    ],
+    mechanical: '',
+    electrical: '',
+    firmware: null
+  },
+  {
     id: 'project-one',
     title: 'MIRA Smart Mirror',
     link: '/projects/project-one',
@@ -231,4 +309,10 @@ export const projects = [
 
 export const getProjectById = (id) => {
   return projects.find(project => project.id === id)
+}
+
+export const getProjectType = (id) => {
+  if (id === 'kalshi-bot') return 'Software'
+  if (id === 'fpga-ar') return 'FPGA'
+  return 'Hardware'
 }
