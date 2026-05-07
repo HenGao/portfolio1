@@ -34,6 +34,12 @@ const ProjectDetailPage = () => {
     )
   }
 
+  const contextParagraphs = Array.isArray(project.fullDescription)
+    ? project.fullDescription
+    : project.fullDescription
+      ? [project.fullDescription]
+      : []
+
   return (
     <div className="page">
       <Navbar />
@@ -41,7 +47,14 @@ const ProjectDetailPage = () => {
         <div className="project-detail">
           <Link to="/projects" className="back-link">← Back to Projects</Link>
           
-          <h1 className="project-detail-title">{project.title}</h1>
+          <div className="project-detail-header">
+            <h1 className="project-detail-title">{project.title}</h1>
+            {project.wip && (
+              <span className="project-detail-wip-badge" title="Work in progress">
+                WIP
+              </span>
+            )}
+          </div>
           
           <div className={`project-images-layout${project.centerMainImage ? ' project-images-layout--single' : ''}`}>
             {project.image && !project.image.includes('placeholder') ? (
@@ -123,12 +136,31 @@ const ProjectDetailPage = () => {
             )}
           </div>
 
-          {project.fullDescription && (
+          {contextParagraphs.length > 0 && (
             <div className="project-summary-section">
               <div className={project.contextElectricalSideBySide ? 'project-summary-row' : ''}>
                 <div className="project-description-item">
                   <strong className="project-description-label">Context:</strong>
-                  <p className="project-full-description">{project.fullDescription}</p>
+                  {contextParagraphs.map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className={`project-full-description project-full-description--context${index > 0 ? ' project-full-description--context-follow' : ''}`}
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                  {project.githubLink && (
+                    <div className="project-github-link-container">
+                      <a
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-github-link btn btn-secondary"
+                      >
+                        View repository on GitHub
+                      </a>
+                    </div>
+                  )}
                   {project.userGuideVideo && (
                     <div className="user-guide-video-container" style={{ marginTop: '1rem' }}>
                       <strong style={{ display: 'block', marginBottom: '0.5rem' }}>User Guide I Developed:</strong>
@@ -166,7 +198,9 @@ const ProjectDetailPage = () => {
               )}
               {project.results && (
                 <div className="project-description-item">
-                  <strong className="project-description-label">My Contributions:</strong>
+                  <strong className="project-description-label">
+                    {(project.resultsSectionLabel || 'My Contributions')}:
+                  </strong>
                   {Array.isArray(project.results) ? (
                     <ul className="project-description-list">
                       {project.results.map((item, index) => (
@@ -181,7 +215,7 @@ const ProjectDetailPage = () => {
                       )
                     }}></p>
                   )}
-                  {project.contributionsImage && (
+                  {project.contributionsImage && !project.contributionsImages?.length && (
                     <div className="contributions-image-container" style={{ marginTop: '1rem' }}>
                       <img 
                         src={project.contributionsImage} 
@@ -190,6 +224,49 @@ const ProjectDetailPage = () => {
                         onClick={() => {
                           setModalImage(project.contributionsImage)
                           setModalAlt('Contributions schematic')
+                        }}
+                      />
+                    </div>
+                  )}
+                  {project.bmsFinalDesign && (
+                    <div className="project-bms-final-section">
+                      <strong className="project-description-label">{project.bmsFinalDesign.title}</strong>
+                      <div className="project-bms-final-grid">
+                        <div className="project-bms-final-slideshow">
+                          <ImageScroller
+                            items={project.bmsFinalDesign.slideshow}
+                            onImageClick={(src, alt) => {
+                              setModalImage(src)
+                              setModalAlt(alt || project.bmsFinalDesign.title)
+                            }}
+                          />
+                        </div>
+                        {project.bmsFinalDesign.sideImage && (
+                          <div className="project-bms-final-side">
+                            <img
+                              src={project.bmsFinalDesign.sideImage}
+                              alt={project.bmsFinalDesign.sideImageAlt || 'Schematic'}
+                              className="project-bms-final-schematic clickable-image"
+                              onClick={() => {
+                                setModalImage(project.bmsFinalDesign.sideImage)
+                                setModalAlt(project.bmsFinalDesign.sideImageAlt || 'Schematic')
+                              }}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  {project.contributionsImages && project.contributionsImages.length > 0 && (
+                    <div className={`contributions-gallery-container${project.bmsFinalDesign ? ' contributions-gallery-container--after-bms' : ''}`}>
+                      {project.bmsFinalDesign && (
+                        <strong className="project-description-label">Version 1 BMS Design</strong>
+                      )}
+                      <ImageScroller
+                        items={project.contributionsImages}
+                        onImageClick={(src, alt) => {
+                          setModalImage(src)
+                          setModalAlt(alt || 'Contribution image')
                         }}
                       />
                     </div>

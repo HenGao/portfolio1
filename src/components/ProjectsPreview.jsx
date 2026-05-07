@@ -71,6 +71,11 @@ const ProjectsPreview = () => {
                 <span className={`project-preview-type-badge ${getTypeClassName(getProjectType(project.id))}`}>
                   {getProjectType(project.id)}
                 </span>
+                {project.wip && (
+                  <span className="project-preview-wip-badge" title="Work in progress">
+                    WIP
+                  </span>
+                )}
                 {project.image && !project.image.includes('placeholder') ? (
                   <img src={project.image} alt={project.title} className="project-preview-img" />
                 ) : (

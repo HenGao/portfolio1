@@ -17,12 +17,42 @@
   color: var(--secondary-color);
 }
 
+.project-detail-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.65rem 0.85rem;
+  margin-bottom: 2rem;
+  margin-left: -60px;
+  padding-left: 60px;
+}
+
+.project-detail-header .project-detail-title {
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-left: 0;
+}
+
 .project-detail-title {
   font-size: 2.5rem;
   color: var(--primary-color);
   margin-bottom: 2rem;
   margin-left: -60px;
   padding-left: 60px;
+}
+
+.project-detail-wip-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.75);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 .project-images-layout {
@@ -37,6 +67,14 @@
 
 .project-images-layout--single {
   grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.project-images-layout--single .project-main-image-container {
+  max-width: 800px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .project-main-image-container {
@@ -126,6 +164,16 @@
   margin-bottom: 3rem;
 }
 
+.project-github-link-container {
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.project-github-link {
+  display: inline-block;
+  text-decoration: none;
+}
+
 .project-summary-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -181,6 +229,14 @@
   margin-top: 0;
 }
 
+.project-full-description--context {
+  white-space: pre-line;
+}
+
+.project-full-description--context-follow {
+  margin-top: 1rem;
+}
+
 .project-description-list {
   font-size: 1.125rem;
   line-height: 1.8;
@@ -217,6 +273,57 @@
   border-radius: 4px;
   display: block;
   margin: 0 auto;
+}
+
+.contributions-gallery-container {
+  width: 100%;
+  margin-top: 1.25rem;
+}
+
+.contributions-gallery-container--after-bms {
+  margin-top: 2rem;
+}
+
+.contributions-gallery-container--after-bms .project-description-label {
+  margin-bottom: 0.75rem;
+}
+
+.project-bms-final-section {
+  margin-top: 2rem;
+}
+
+.project-bms-final-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  margin-top: 0.75rem;
+}
+
+.project-bms-final-slideshow {
+  width: 100%;
+  min-width: 0;
+}
+
+.project-bms-final-side {
+  width: 100%;
+  min-width: 0;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+}
+
+.project-bms-final-schematic {
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: contain;
+  border-radius: 4px;
+  display: block;
 }
 
 .project-sections-grid {
@@ -398,5 +505,9 @@
   .project-pcb-images-wrapper {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+
+  .project-bms-final-grid {
+    grid-template-columns: 1fr;
   }
 }

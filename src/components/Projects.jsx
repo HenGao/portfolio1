@@ -21,6 +21,11 @@ const Projects = () => {
                 <span className={`project-type-badge ${getTypeClassName(getProjectType(project.id))}`}>
                   {getProjectType(project.id)}
                 </span>
+                {project.wip && (
+                  <span className="project-wip-badge" title="Work in progress">
+                    WIP
+                  </span>
+                )}
                 {project.image && !project.image.includes('placeholder') ? (
                   <img src={project.image} alt={project.title} className="project-card-img" />
                 ) : (

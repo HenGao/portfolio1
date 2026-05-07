@@ -1,9 +1,42 @@
 export const projects = [
   {
+    id: 'okclaw',
+    title: 'OkClaw: AI Agent Dating',
+    link: '/projects/okclaw',
+    image: '/okclaw.png',
+    centerMainImage: true,
+    githubLink: 'https://github.com/HenGao/OkClaw',
+    description:
+      'Next.js MVP for an AI “dating” network—agent profiles, discovery, live date sessions, matches, and history—built toward a Supabase-backed stack.',
+    fullDescription: [
+      'OkClaw is an exploration into AI-to-AI connection. I was inspired to create this project after seeing the success of MoltBook. I believe that AI-to-AI interaction with no human intervention is the next step in the natural development of artificial intelligence, and I wanted to explore social networks built solely for AI.',
+      'In OkClaw your agent can create profiles, discover others, run date sessions, and can eventually team up on missions. The current app is a Next.js 16 + React 19 + TypeScript + Tailwind frontend with a rich domain model (agents, matches, signals, compatibility, transcript lines, history, missions) and mock data. Routes cover a playable home “Live Date” flow (stepped transcript, signal and compatibility panels, verdict UI), a Discover grid, profile, matches, and history. The repo documents a production path using Supabase (Postgres, RLS, auth, realtime), optional queue workers for missions, and Vercel for hosting, plus a security checklist aligned with agent-network style products.'
+    ],
+    how: [
+      'Modeled agent profiles, match state, date formats, conversation transcripts, per-date signals, compatibility axes, history entries, and future mission types in shared TypeScript types.',
+      'Shipped multi-page UI: Live Date on the home route, Discover, profile, matches, and history, using client components where interaction is required (e.g. transcript playback and verdicts).',
+      'Implemented the Live Date surface with timed transcript reveal, live/concluded banner state, dual agent cards, and outcome flow driven by mock conversation and scoring data.',
+      'Captured deployment and backend direction in README: Vercel for the app, Supabase for data and auth, realtime for sessions, and rate limiting / RLS guidance for a safe public launch.'
+    ],
+    results: '',
+    technologies: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'Vercel',
+      'Supabase (planned)'
+    ],
+    mechanical: '',
+    electrical: '',
+    firmware: null,
+    wip: true
+  },
+  {
     id: 'runna-stick',
     title: 'Runna Stick',
     link: '/projects/runna-stick',
-    image: '/placeholder-project.png',
+    image: '/runna-stick.png',
     description: 'Most recent project.',
     fullDescription: 'Details coming soon.',
     how: [],
@@ -11,7 +44,8 @@ export const projects = [
     technologies: [],
     mechanical: '',
     electrical: '',
-    firmware: null
+    firmware: null,
+    wip: true
   },
   {
     id: 'smart-plug',
@@ -25,18 +59,40 @@ export const projects = [
     technologies: [],
     mechanical: '',
     electrical: '',
-    firmware: null
+    firmware: null,
+    wip: true
   },
   {
     id: 'grover',
     title: 'Growver',
     link: '/projects/grover',
     image: '/growver.png',
-    description: 'Third newest project.',
-    fullDescription: 'Details coming soon.',
+    description: 'Autonomous tree-planting rover with custom battery and BMS.',
+    fullDescription:
+      'Worked with a team of 13 other engineers to innovate the field of tree planting, through developing a tree planting rover within a 3 month cycle. This robot will autonomously navigate to a desired location and automatically plant a line of plant saplings.',
     how: [],
-    results: '',
-    technologies: [],
+    additionalImages: [
+      '/growver/gallery/IMG_6960.jpg',
+      '/growver/gallery/IMG_6972.jpg',
+      '/growver/gallery/chassis-fade.gif',
+      '/growver/gallery/digging.gif',
+      '/growver/gallery/growver-drive.gif',
+      '/growver/gallery/growver-seedlings.gif'
+    ],
+    results:
+      'For this project I was the lead for the battery subsystem. In this role, I designed and developed both a battery but also a concise BMS system that regulated battery faults, balanced load cells, and managed overheating. All designs were created in altium, and the end board was ordered through JLC.',
+    contributionsImages: ['/growver/electrical/bmsv1.png', '/growver/electrical/bmsv1-layout.png'],
+    bmsFinalDesign: {
+      title: 'BMS Final Design',
+      slideshow: [
+        '/growver/electrical/IMG_1192.jpg',
+        '/growver/electrical/bmsv2.png',
+        '/growver/electrical/bmsv2layout.png'
+      ],
+      sideImage: '/growver/electrical/schematic.png',
+      sideImageAlt: 'BMS schematic'
+    },
+    technologies: ['Altium', 'Battery Management', 'PCB Design', 'JLCPCB', 'Power Electronics', 'Team Leadership'],
     mechanical: '',
     electrical: '',
     firmware: null
@@ -60,6 +116,8 @@ export const projects = [
     title: 'Kalshi bot',
     link: '/projects/kalshi-bot',
     image: '/kalshi-bot.png',
+    centerMainImage: true,
+    githubLink: 'https://github.com/HenGao/kalshibot',
     description: 'ML-assisted BTC prediction market trading system with robust risk controls.',
     fullDescription: 'Built an end-to-end Python trading system for Kalshi BTC markets that supports simulation, paper trading, and live execution. The bot continuously prices market edge from real-time order books and BTC data, then executes only when expected value clears spread, fee, and confidence filters.',
     how: [
@@ -68,8 +126,9 @@ export const projects = [
       'Built safety infrastructure including stop-loss logic, strategy-gate checks, drawdown kill switch, and per-market state recovery for reliable unattended operation.',
       'Created observability tooling with JSONL live metrics, dashboard views, and offline evaluation scripts to validate behavior before deployment.'
     ],
-    results: 'In paper trading, the bot delivered a +$12 profit in a single day while enforcing strict entry filters and risk guardrails.',
-    contributionsImage: '/kalshi-profit-12.svg',
+    resultsSectionLabel: 'Results',
+    results:
+      'In paper trading, the bot delivered a +$12 profit in a single day while enforcing strict entry filters and risk guardrails. If that pace were sustained every day for a full year, it would imply roughly $4,380 in profit over 365 days (before accounting for fees, variance, or changing market conditions).',
     technologies: [
       'Python', 'Pandas', 'NumPy', 'scikit-learn', 'Flask', 'Kalshi API', 'REST APIs', 'Algorithmic Trading'
     ],
@@ -312,7 +371,7 @@ export const getProjectById = (id) => {
 }
 
 export const getProjectType = (id) => {
-  if (id === 'kalshi-bot') return 'Software'
+  if (id === 'kalshi-bot' || id === 'okclaw') return 'Software'
   if (id === 'fpga-ar') return 'FPGA'
   return 'Hardware'
 }
