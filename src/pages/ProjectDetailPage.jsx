@@ -136,6 +136,37 @@ const ProjectDetailPage = () => {
             )}
           </div>
 
+          {project.heroDescription && (
+            <section className="project-hero-description-section">
+              <strong className="project-description-label">Description:</strong>
+              <p className="project-hero-description">{project.heroDescription}</p>
+            </section>
+          )}
+
+          {project.currentProgress && (
+            <section className="project-current-progress-section">
+              <strong className="project-description-label">{project.currentProgress.title}:</strong>
+              {project.currentProgress.items?.map((item, index) => (
+                <div key={index} className="project-current-progress-item">
+                  {item.label && (
+                    <strong className="project-current-progress-label">{item.label}</strong>
+                  )}
+                  <div className="project-current-progress-image-container">
+                    <img
+                      src={item.image}
+                      alt={item.alt || item.label || 'Current progress'}
+                      className="project-current-progress-image clickable-image"
+                      onClick={() => {
+                        setModalImage(item.image)
+                        setModalAlt(item.alt || item.label || 'Current progress')
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </section>
+          )}
+
           {contextParagraphs.length > 0 && (
             <div className="project-summary-section">
               <div className={project.contextElectricalSideBySide ? 'project-summary-row' : ''}>

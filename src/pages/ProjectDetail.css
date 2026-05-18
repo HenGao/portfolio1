@@ -254,6 +254,56 @@
   margin-bottom: 0;
 }
 
+.project-hero-description-section {
+  margin-bottom: 2.5rem;
+  max-width: 900px;
+}
+
+.project-hero-description {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin: 0.5rem 0 0;
+}
+
+.project-current-progress-section {
+  margin-bottom: 3rem;
+}
+
+.project-current-progress-item {
+  margin-top: 1.25rem;
+}
+
+.project-current-progress-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+.project-current-progress-image-container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-current-progress-image {
+  width: 100%;
+  height: auto;
+  max-height: 720px;
+  object-fit: contain;
+  border-radius: 4px;
+  display: block;
+}
+
 .contributions-image-container {
   width: 100%;
   background: #ffffff;

@@ -37,8 +37,22 @@ export const projects = [
     title: 'Runna Stick',
     link: '/projects/runna-stick',
     image: '/runna-stick.png',
-    description: 'Most recent project.',
+    centerMainImage: true,
+    description:
+      'A smart wearable for Strava—hydration, run stats, form feedback via haptics, and tap-to-friend on Strava.',
+    heroDescription:
+      'A smart wearable designed to make Strava integration smarter, easier, and more social. Regulates your sweat to track hydration, allows users to track running statistics, regulates the user\'s form through haptic feedback, and allows users to friend each other on Strava by touching the sticks together.',
     fullDescription: 'Details coming soon.',
+    currentProgress: {
+      title: 'Current progress',
+      items: [
+        {
+          label: 'Current MCU design:',
+          image: '/runna-stick/mcu-design.png',
+          alt: 'nRF52840 MCU schematic'
+        }
+      ]
+    },
     how: [],
     results: '',
     technologies: [],
@@ -52,8 +66,47 @@ export const projects = [
     title: 'Smart Plug',
     link: '/projects/smart-plug',
     image: '/smart-plug.png',
-    description: 'Second newest project.',
+    centerMainImage: true,
+    description:
+      'An AI-native smart outlet for power use, device control, and RUNNA body-position tracking—startup in development.',
+    heroDescription:
+      'An AI-native plug outlet that regulates your power usage, turns on and dims devices, and utilizes RUNNA to track your body positioning. Currently developing as a startup.',
     fullDescription: 'Details coming soon.',
+    currentProgress: {
+      title: 'Current progress',
+      items: [
+        {
+          label: 'Layouting:',
+          image: '/smart-plug/layout.png',
+          alt: 'Smart plug PCB layout'
+        },
+        {
+          label: 'System breakdown:',
+          image: '/smart-plug/system-breakdown.png',
+          alt: 'Smart plug system breakdown schematic'
+        },
+        {
+          label: 'Power sensing:',
+          image: '/smart-plug/power-sensing.png',
+          alt: 'ADE7953 power sensing schematic'
+        },
+        {
+          label: 'Relay:',
+          image: '/smart-plug/relay.png',
+          alt: 'G5LE-1 relay control schematic'
+        },
+        {
+          label: 'AC Protection:',
+          image: '/smart-plug/ac-protection.png',
+          alt: 'Fuse and MOV AC protection schematic'
+        },
+        {
+          label: 'Current PCB:',
+          image: '/smart-plug/current-pcb.png',
+          alt: 'Assembled smart plug PCB prototype'
+        }
+      ]
+    },
     how: [],
     results: '',
     technologies: [],
