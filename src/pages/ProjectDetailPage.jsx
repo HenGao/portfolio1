@@ -136,10 +136,30 @@ const ProjectDetailPage = () => {
             )}
           </div>
 
+          {project.projectOverviewVideo && (
+            <section className="project-overview-video-section">
+              <h2 className="project-section-title">Project Overview</h2>
+              <div className="project-overview-video-container">
+                <video
+                  src={project.projectOverviewVideo}
+                  className="project-overview-video"
+                  controls
+                  playsInline
+                  preload="metadata"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </section>
+          )}
+
           {project.heroDescription && (
             <section className="project-hero-description-section">
               <strong className="project-description-label">Description:</strong>
-              <p className="project-hero-description">{project.heroDescription}</p>
+              <p
+                className="project-hero-description"
+                dangerouslySetInnerHTML={{ __html: project.heroDescription }}
+              />
             </section>
           )}
 
@@ -180,6 +200,18 @@ const ProjectDetailPage = () => {
                       {paragraph}
                     </p>
                   ))}
+                  {project.finalReportLink && (
+                    <div className="project-github-link-container">
+                      <a
+                        href={project.finalReportLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-github-link btn btn-secondary"
+                      >
+                        View final report (PDF)
+                      </a>
+                    </div>
+                  )}
                   {project.githubLink && (
                     <div className="project-github-link-container">
                       <a

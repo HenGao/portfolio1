@@ -254,6 +254,27 @@
   margin-bottom: 0;
 }
 
+.project-overview-video-section {
+  margin-bottom: 3rem;
+}
+
+.project-overview-video-container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.project-overview-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
 .project-hero-description-section {
   margin-bottom: 2.5rem;
   max-width: 900px;
@@ -264,6 +285,11 @@
   line-height: 1.8;
   color: var(--text-primary);
   margin: 0.5rem 0 0;
+}
+
+.project-hero-description strong {
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
 .project-current-progress-section {

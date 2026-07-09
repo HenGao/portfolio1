@@ -1,5 +1,53 @@
 export const projects = [
   {
+    id: 'helping-hand',
+    title: 'Helping Hand',
+    link: '/projects/helping-hand',
+    image: '/helping-hand.png',
+    additionalImages: [
+      '/helping-hand/lab-demo-1.png',
+      '/helping-hand/presentation.png'
+    ],
+    projectOverviewVideo: '/helping-hand/project-overview.mp4',
+    finalReportLink: '/helping-hand/final-report.pdf',
+    description:
+      'First-place senior capstone: assistive wheelchair arm with eye tracking, voice control, and vision-guided manipulation.',
+    heroDescription:
+      'Helping Hand is an assistive robotic platform that mounts on a manual wheelchair and helps users reach and manipulate objects without upper-body strength. Control combines eye tracking, voice commands, and vision-guided motion from a RoArm-M3-Pro arm, coordinated through ROS 2 and a finite state machine. <strong>The project won first place in my semester’s senior capstone design competition.</strong>',
+    fullDescription: [
+      'Millions of people rely on wheelchairs but still lack affordable, practical help with everyday manipulation at home. Helping Hand addresses that gap with a modular system: gaze and speech for intent, a mounted manipulator for action, and software that keeps those modes synchronized safely.',
+      'The architecture splits into sensing, planning, and actuation. Eye tracking maps where the user is looking; voice control handles discrete commands; the RoArm-M3-Pro executes vision-guided grasps and moves. ROS 2 links the subsystems, while a finite state machine governs mode changes, I/O, and integration between hardware and application logic. A dedicated battery and power stage supports portable operation on the chair.',
+      'We validated the design in stages—eye tracking accuracy, arm kinematics and workspace, then full closed-loop integration—documented in our final report with cost analysis and compliance notes.'
+    ],
+    how: [
+      'Defined system I/O and software integration so eye tracking, voice, and arm nodes communicate reliably over ROS 2.',
+      'Implemented an eye-tracking pipeline for gaze-based pointing and selection tied into the control stack.',
+      'Added voice control for spoken commands that complement vision input during daily tasks.',
+      'Integrated the RoArm-M3-Pro with vision-guided manipulation for reach, orient, and grasp behaviors.',
+      'Built a finite state machine to coordinate control modes, safety transitions, and high-level task flow.',
+      'Designed wheelchair mounting, harness routing, and a battery/power subsystem for stable field use.',
+      'Ran subsystem tests (eye tracking, arm motion) followed by full system integration testing per our capstone test plan.'
+    ],
+    results:
+      'Won first place in my semester’s senior capstone design competition. Delivered a working prototype that demonstrates gaze-, voice-, and vision-driven manipulation from a wheelchair, with documented subsystem validation, cost analysis, and a path toward more robust assistive deployment.',
+    technologies: [
+      'ROS 2',
+      'Python',
+      'Eye Tracking',
+      'Voice Control',
+      'Computer Vision',
+      'RoArm-M3-Pro',
+      'Finite State Machine',
+      'Assistive Robotics',
+      'Power Systems'
+    ],
+    mechanical:
+      'Mechanical work focused on mounting the RoArm-M3-Pro to a manual wheelchair frame and routing harnesses so the arm clears the user’s head and workspace while staying rigid enough for repeatable grasps.',
+    electrical:
+      'Electrical design covers sensor and compute interconnect, arm driver power, and a consolidated battery/power distribution approach sized for portable use on the chair.',
+    firmware: null
+  },
+  {
     id: 'okclaw',
     title: 'OkClaw: AI Agent Dating',
     link: '/projects/okclaw',
