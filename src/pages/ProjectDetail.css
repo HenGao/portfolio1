@@ -279,6 +279,7 @@
   height: 100%;
   display: block;
   object-fit: contain;
+  border: none;
 }
 
 .project-hero-description-section {

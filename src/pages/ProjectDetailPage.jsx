@@ -9,12 +9,17 @@ import './ProjectDetail.css'
 
 const getYouTubeEmbedUrl = (url) => {
   if (!url || typeof url !== 'string') return url
+  const shortMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/)
+  if (shortMatch) return `https://www.youtube.com/embed/${shortMatch[1]}?autoplay=0`
   const shortsMatch = url.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/)
   if (shortsMatch) return `https://www.youtube.com/embed/${shortsMatch[1]}?autoplay=0`
   const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]+)/)
   if (watchMatch) return `https://www.youtube.com/embed/${watchMatch[1]}?autoplay=0`
   return url.replace('watch?v=', 'embed/') + (url.includes('embed/') ? '' : '?autoplay=0')
 }
+
+const isYouTubeUrl = (url) =>
+  typeof url === 'string' && /(youtube\.com|youtu\.be)/i.test(url)
 
 const ProjectDetailPage = () => {
   const { projectId } = useParams()
@@ -142,15 +147,25 @@ const ProjectDetailPage = () => {
                 {project.projectOverviewTitle || 'Project Overview'}
               </h2>
               <div className="project-overview-video-container">
-                <video
-                  src={project.projectOverviewVideo}
-                  className="project-overview-video"
-                  controls
-                  playsInline
-                  preload="metadata"
-                >
-                  Your browser does not support the video tag.
-                </video>
+                {isYouTubeUrl(project.projectOverviewVideo) ? (
+                  <iframe
+                    title={project.projectOverviewTitle || 'Project Overview'}
+                    src={getYouTubeEmbedUrl(project.projectOverviewVideo)}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="project-overview-video"
+                  />
+                ) : (
+                  <video
+                    src={project.projectOverviewVideo}
+                    className="project-overview-video"
+                    controls
+                    playsInline
+                    preload="metadata"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                )}
               </div>
             </section>
           )}

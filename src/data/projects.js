@@ -49,6 +49,8 @@ export const projects = [
       '/hydrolet/band.png',
       '/hydrolet/coaster.png'
     ],
+    projectOverviewVideo: 'https://youtu.be/6PEsWbBr0kc',
+    projectOverviewTitle: 'Demo',
     githubLink: 'https://github.com/ConnorFriedman10/Hydrolet',
     description:
       'A smart bracelet and illuminated coaster system that reminds dementia patients to stay hydrated.',
