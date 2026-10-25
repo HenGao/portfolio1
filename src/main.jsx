@@ -3,6 +3,16 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
+const TITLE = 'Henry Gao · Hardware Engineer'
+const AWAY_TITLE = 'Psst... come back :)'
+const favicon = document.querySelector('link[rel="icon"]')
+
+document.addEventListener('visibilitychange', () => {
+  const away = document.hidden
+  document.title = away ? AWAY_TITLE : TITLE
+  if (favicon) favicon.href = away ? '/favicon-away.svg' : '/favicon.svg'
+})
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
