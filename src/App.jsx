@@ -10,6 +10,14 @@ import ProjectDetailPage from './pages/ProjectDetailPage'
 import ScrollToTop from './components/ScrollToTop'
 import './App.css'
 
+let visitCounted = false
+
+function countVisitOnce(event) {
+  if (visitCounted) return null
+  visitCounted = true
+  return event
+}
+
 function App() {
   return (
     <Router>
@@ -26,7 +34,7 @@ function App() {
         <Route path="/projects/:projectId" element={<ProjectDetailPage />} />
         <Route path="/resume" element={<ResumePage />} />
       </Routes>
-      <Analytics />
+      <Analytics beforeSend={countVisitOnce} />
     </Router>
   )
 }
