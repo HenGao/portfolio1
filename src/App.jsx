@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import ProjectsPreview from './components/ProjectsPreview'
@@ -25,6 +26,7 @@ function App() {
         <Route path="/projects/:projectId" element={<ProjectDetailPage />} />
         <Route path="/resume" element={<ResumePage />} />
       </Routes>
+      <Analytics />
     </Router>
   )
 }
