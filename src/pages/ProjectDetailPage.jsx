@@ -2,503 +2,226 @@ import React, { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { getProjectById } from '../data/projects'
 import Navbar from '../components/Navbar'
-import ImageScroller from '../components/ImageScroller'
 import ImageModal from '../components/ImageModal'
 import './Page.css'
 import './ProjectDetail.css'
 
 const getYouTubeEmbedUrl = (url) => {
-  if (!url || typeof url !== 'string') return url
-  const shortMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/)
-  if (shortMatch) return `https://www.youtube.com/embed/${shortMatch[1]}?autoplay=0`
-  const shortsMatch = url.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/)
-  if (shortsMatch) return `https://www.youtube.com/embed/${shortsMatch[1]}?autoplay=0`
-  const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]+)/)
-  if (watchMatch) return `https://www.youtube.com/embed/${watchMatch[1]}?autoplay=0`
-  return url.replace('watch?v=', 'embed/') + (url.includes('embed/') ? '' : '?autoplay=0')
+  const match =
+    url.match(/youtu\.be\/([\w-]+)/) ||
+    url.match(/youtube\.com\/shorts\/([\w-]+)/) ||
+    url.match(/[?&]v=([\w-]+)/)
+  return match ? `https://www.youtube.com/embed/${match[1]}` : url
 }
 
-const isYouTubeUrl = (url) =>
-  typeof url === 'string' && /(youtube\.com|youtu\.be)/i.test(url)
+const ArrowLeft = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M13 8H3M7 4L3 8l4 4" />
+  </svg>
+)
+
+const ArrowUpRight = () => (
+  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M5 11l6-6M6 5h5v5" />
+  </svg>
+)
+
+const hasPlayerControls = (item) => item.type === 'youtube' || (item.type === 'video' && item.controls)
+
+const Media = ({ item, onOpen }) => {
+  const type = item.type || 'image'
+  const fit = { objectFit: item.fit || 'contain' }
+
+  if (type === 'youtube') {
+    return (
+      <iframe
+        title={item.alt}
+        src={getYouTubeEmbedUrl(item.src)}
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    )
+  }
+
+  if (type === 'video') {
+    return item.controls ? (
+      <video src={item.src} poster={item.poster} style={fit} aria-label={item.alt} controls playsInline preload="metadata" />
+    ) : (
+      <video src={item.src} style={fit} aria-label={item.alt} autoPlay muted loop playsInline />
+    )
+  }
+
+  return (
+    <button type="button" className="pd-zoom" onClick={() => onOpen(item)} aria-label={`Enlarge: ${item.alt}`}>
+      <img src={item.src} alt={item.alt} style={fit} />
+    </button>
+  )
+}
+
+const frameStyle = (item) => ({
+  background: item.bg || (item.type === 'youtube' ? '#18181B' : '#F4F4F5')
+})
+
+const Gallery = ({ images, onOpen }) => {
+  const [index, setIndex] = useState(0)
+  const [hero, ...rest] = images
+  const current = rest[index]
+  const step = (delta) => setIndex((i) => (i + delta + rest.length) % rest.length)
+
+  return (
+    <section className="pd-gallery" aria-label="Gallery">
+      <figure className={`pd-figure pd-figure--hero${rest.length === 0 ? ' pd-figure--solo' : ''}`}>
+        <div className="pd-frame" style={frameStyle(hero)}>
+          <Media item={hero} onOpen={onOpen} />
+        </div>
+        <figcaption>{hero.caption || hero.alt}</figcaption>
+      </figure>
+
+      {current && (
+        <figure className="pd-figure pd-figure--side">
+          <div className="pd-frame" style={frameStyle(current)}>
+            <Media key={current.src} item={current} onOpen={onOpen} />
+            {rest.length > 1 && (
+              <div className={`pd-steppers${hasPlayerControls(current) ? ' pd-steppers--top' : ''}`}>
+                <button type="button" onClick={() => step(-1)} aria-label="Previous image">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M10 3L5 8l5 5" /></svg>
+                </button>
+                <button type="button" onClick={() => step(1)} aria-label="Next image">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5" /></svg>
+                </button>
+              </div>
+            )}
+          </div>
+          <div className="pd-figure-footer">
+            <figcaption>{current.caption || current.alt}</figcaption>
+            {rest.length > 1 && <span className="pd-counter">{index + 1} / {rest.length}</span>}
+          </div>
+        </figure>
+      )}
+    </section>
+  )
+}
+
+const Subsystem = ({ section, onOpen }) => {
+  const figures = section.figures || []
+  return (
+    <section className={`pd-sub${figures.length === 1 ? ' pd-sub--split' : ''}`}>
+      <div className="pd-sub-text">
+        <h2>{section.label || 'Electrical'}</h2>
+        {section.headline && <p className="pd-sub-headline">{section.headline}</p>}
+        <p dangerouslySetInnerHTML={{ __html: section.text }} />
+      </div>
+      {figures.length > 0 && (
+        <div className="pd-sub-figures">
+          {figures.map((figure) => (
+            <figure key={figure.src} className="pd-figure">
+              <div className="pd-frame pd-frame--figure" style={frameStyle({ bg: figure.bg || '#FFFFFF' })}>
+                <Media item={figure} onOpen={onOpen} />
+              </div>
+              {figure.caption && <figcaption>{figure.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      )}
+    </section>
+  )
+}
+
+const TextSection = ({ title, items }) => {
+  if (!items || items.length === 0) return null
+  return (
+    <div className="pd-block">
+      <h2>{title}</h2>
+      <ul>
+        {items.map((item, index) => (
+          <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
+        ))}
+      </ul>
+    </div>
+  )
+}
 
 const ProjectDetailPage = () => {
   const { projectId } = useParams()
   const project = getProjectById(projectId)
-  const [modalImage, setModalImage] = useState(null)
-  const [modalAlt, setModalAlt] = useState('')
+  const [modalItem, setModalItem] = useState(null)
 
   if (!project) {
     return (
       <div className="page">
         <Navbar />
-        <div className="container">
-          <h1>Project Not Found</h1>
-          <Link to="/projects">Back to Projects</Link>
-        </div>
+        <main className="pd">
+          <h1 className="pd-title">Project not found</h1>
+          <Link to="/projects" className="pd-back"><ArrowLeft />All projects</Link>
+        </main>
       </div>
     )
   }
 
-  const contextParagraphs = Array.isArray(project.fullDescription)
-    ? project.fullDescription
-    : project.fullDescription
-      ? [project.fullDescription]
-      : []
+  const { name, subtitle, category, status, images = [], what, how, results, electrical, links = [], tags = [] } = project
 
   return (
     <div className="page">
       <Navbar />
-      <div className="container">
-        <div className="project-detail">
-          <Link to="/projects" className="back-link">← Back to Projects</Link>
-          
-          <div className="project-detail-header">
-            <h1 className="project-detail-title">{project.title}</h1>
-            {project.wip && (
-              <span className="project-detail-wip-badge" title="Work in progress">
-                WIP
-              </span>
-            )}
+      <main className="pd">
+        <Link to="/projects" className="pd-back">
+          <ArrowLeft />
+          All projects
+        </Link>
+
+        <header className="pd-header">
+          <div className="pd-heading">
+            <h1 className="pd-title">{name}</h1>
+            {subtitle && <p className="pd-subtitle">{subtitle}</p>}
           </div>
-          
-          <div className={`project-images-layout${project.centerMainImage ? ' project-images-layout--single' : ''}`}>
-            {project.image && !project.image.includes('placeholder') ? (
-              <div className="project-main-image-container">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="project-main-image clickable-image"
-                  onClick={() => {
-                    setModalImage(project.image)
-                    setModalAlt(project.title)
-                  }}
-                />
-              </div>
-            ) : (
-              <div className="project-main-image-placeholder">
-                <svg viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="800" height="400" fill="#f3f4f6"/>
-                  <text x="400" y="200" fontSize="24" fill="#334139" textAnchor="middle" fontWeight="500">
-                    {project.title}
-                  </text>
-                </svg>
-              </div>
-            )}
+          <p className="pd-meta">
+            {category}
+            {status && <> · {status}</>}
+          </p>
+        </header>
 
-            {!project.centerMainImage && (
-            <div className={`project-slider-container${!project.heroVideo && !(project.pcbImage || project.pcbImage2) && project.additionalImages && project.additionalImages.length === 1 ? ' project-slider-container--single-image' : ''}`}>
-              {project.heroVideo && (
-                <div className="project-hero-video-container">
-                  <iframe
-                    title="Project video"
-                    src={getYouTubeEmbedUrl(project.heroVideo)}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="project-hero-video"
-                  />
-                </div>
-              )}
-              {(project.pcbImage || project.pcbImage2) && (
-                <div className="project-pcb-images-wrapper">
-                  {project.pcbImage && (
-                    <div className="project-pcb-image-container">
-                      <img 
-                        src={project.pcbImage} 
-                        alt="PCB Design" 
-                        className="project-pcb-image clickable-image"
-                        onClick={() => {
-                          setModalImage(project.pcbImage)
-                          setModalAlt('PCB Design')
-                        }}
-                      />
-                    </div>
-                  )}
-                  {project.pcbImage2 && (
-                    <div className="project-pcb-image-container">
-                      <img 
-                        src={project.pcbImage2} 
-                        alt="PCB Design 2" 
-                        className="project-pcb-image clickable-image"
-                        onClick={() => {
-                          setModalImage(project.pcbImage2)
-                          setModalAlt('PCB Design 2')
-                        }}
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
-              {project.additionalImages && project.additionalImages.length > 0 && (
-                <ImageScroller 
-                  items={project.additionalImages} 
-                  onImageClick={(src, alt) => {
-                    setModalImage(src)
-                    setModalAlt(alt)
-                  }}
-                />
-              )}
-            </div>
-            )}
+        {images.length > 0 && <Gallery key={project.id} images={images} onOpen={setModalItem} />}
+
+        <section className="pd-text">
+          <TextSection title="What?" items={what} />
+          <TextSection title="How?" items={how} />
+          <TextSection title="Results" items={results} />
+        </section>
+
+        {links.length > 0 && (
+          <div className="pd-links">
+            {links.map((link, index) => {
+              const external = /^https?:/.test(link.href)
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`pd-button${index === 0 ? ' pd-button--primary' : ''}`}
+                  {...(link.download ? { download: link.download } : { target: '_blank', rel: 'noopener noreferrer' })}
+                >
+                  {link.label}
+                  {external && <ArrowUpRight />}
+                </a>
+              )
+            })}
           </div>
+        )}
 
-          {project.projectOverviewVideo && (
-            <section className="project-overview-video-section">
-              <h2 className="project-section-title">
-                {project.projectOverviewTitle || 'Project Overview'}
-              </h2>
-              <div className="project-overview-video-container">
-                {isYouTubeUrl(project.projectOverviewVideo) ? (
-                  <iframe
-                    title={project.projectOverviewTitle || 'Project Overview'}
-                    src={getYouTubeEmbedUrl(project.projectOverviewVideo)}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="project-overview-video"
-                  />
-                ) : (
-                  <video
-                    src={project.projectOverviewVideo}
-                    className="project-overview-video"
-                    controls
-                    playsInline
-                    preload="metadata"
-                  >
-                    Your browser does not support the video tag.
-                  </video>
-                )}
-              </div>
-            </section>
-          )}
+        {electrical && <Subsystem section={electrical} onOpen={setModalItem} />}
 
-          {project.heroDescription && (
-            <section className="project-hero-description-section">
-              <strong className="project-description-label">Description:</strong>
-              <p
-                className="project-hero-description"
-                dangerouslySetInnerHTML={{ __html: project.heroDescription }}
-              />
-            </section>
-          )}
-
-          {project.currentProgress && (
-            <section className="project-current-progress-section">
-              <strong className="project-description-label">{project.currentProgress.title}:</strong>
-              {project.currentProgress.items?.map((item, index) => (
-                <div key={index} className="project-current-progress-item">
-                  {item.label && (
-                    <strong className="project-current-progress-label">{item.label}</strong>
-                  )}
-                  <div className="project-current-progress-image-container">
-                    <img
-                      src={item.image}
-                      alt={item.alt || item.label || 'Current progress'}
-                      className="project-current-progress-image clickable-image"
-                      onClick={() => {
-                        setModalImage(item.image)
-                        setModalAlt(item.alt || item.label || 'Current progress')
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </section>
-          )}
-
-          {contextParagraphs.length > 0 && (
-            <div className="project-summary-section">
-              <div className={project.contextElectricalSideBySide ? 'project-summary-row' : ''}>
-                <div className="project-description-item">
-                  <strong className="project-description-label">
-                    {(project.contextSectionLabel || 'Context')}:
-                  </strong>
-                  {contextParagraphs.map((paragraph, index) => (
-                    <p
-                      key={index}
-                      className={`project-full-description project-full-description--context${index > 0 ? ' project-full-description--context-follow' : ''}`}
-                      dangerouslySetInnerHTML={{ __html: paragraph }}
-                    />
-                  ))}
-                  {project.finalReportLink && (
-                    <div className="project-github-link-container">
-                      <a
-                        href={project.finalReportLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-github-link btn btn-secondary"
-                      >
-                        View final report (PDF)
-                      </a>
-                    </div>
-                  )}
-                  {project.websiteLink && (
-                    <div className="project-github-link-container">
-                      <a
-                        href={project.websiteLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-github-link btn btn-secondary"
-                      >
-                        Visit website
-                      </a>
-                    </div>
-                  )}
-                  {project.githubLink && (
-                    <div className="project-github-link-container">
-                      <a
-                        href={project.githubLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-github-link btn btn-secondary"
-                      >
-                        View repository on GitHub
-                      </a>
-                    </div>
-                  )}
-                  {project.userGuideVideo && (
-                    <div className="user-guide-video-container" style={{ marginTop: '1rem' }}>
-                      <strong style={{ display: 'block', marginBottom: '0.5rem' }}>User Guide I Developed:</strong>
-                      <a 
-                        href={project.userGuideVideo} 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="user-guide-video-link btn btn-secondary"
-                      >
-                        Watch User Guide Video
-                      </a>
-                    </div>
-                  )}
-                </div>
-                {project.contextElectricalSideBySide && project.electrical && (
-                  <div className="project-description-item project-description-item--electrical">
-                    <strong className="project-description-label">Electrical:</strong>
-                    <p className="project-full-description" dangerouslySetInnerHTML={{ __html: project.electrical }} />
-                  </div>
-                )}
-              </div>
-              {project.how && (Array.isArray(project.how) ? project.how.length > 0 : project.how) && (
-                <div className="project-description-item">
-                  <strong className="project-description-label">How:</strong>
-                  {Array.isArray(project.how) ? (
-                    <ul className="project-description-list">
-                      {project.how.map((item, index) => (
-                        <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="project-full-description" dangerouslySetInnerHTML={{ __html: project.how }} />
-                  )}
-                </div>
-              )}
-              {project.results && (
-                <div className="project-description-item">
-                  <strong className="project-description-label">
-                    {(project.resultsSectionLabel || 'My Contributions')}:
-                  </strong>
-                  {Array.isArray(project.results) ? (
-                    <ul className="project-description-list">
-                      {project.results.map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="project-full-description" dangerouslySetInnerHTML={{
-                      __html: project.results.replace(
-                        /reads the analog signal from a pH sensor, filters it, and sends it back to our MCU via SPI protocol/g,
-                        '<strong>reads the analog signal from a pH sensor, filters it, and sends it back to our MCU via SPI protocol</strong>'
-                      )
-                    }}></p>
-                  )}
-                  {project.contributionsImage && !project.contributionsImages?.length && (
-                    <div className="contributions-image-container" style={{ marginTop: '1rem' }}>
-                      <img 
-                        src={project.contributionsImage} 
-                        alt="Contributions schematic" 
-                        className="contributions-image clickable-image"
-                        onClick={() => {
-                          setModalImage(project.contributionsImage)
-                          setModalAlt('Contributions schematic')
-                        }}
-                      />
-                    </div>
-                  )}
-                  {project.bmsFinalDesign && (
-                    <div className="project-bms-final-section">
-                      <strong className="project-description-label">{project.bmsFinalDesign.title}</strong>
-                      <div className="project-bms-final-grid">
-                        <div className="project-bms-final-slideshow">
-                          <ImageScroller
-                            items={project.bmsFinalDesign.slideshow}
-                            onImageClick={(src, alt) => {
-                              setModalImage(src)
-                              setModalAlt(alt || project.bmsFinalDesign.title)
-                            }}
-                          />
-                        </div>
-                        {project.bmsFinalDesign.sideImage && (
-                          <div className="project-bms-final-side">
-                            <img
-                              src={project.bmsFinalDesign.sideImage}
-                              alt={project.bmsFinalDesign.sideImageAlt || 'Schematic'}
-                              className="project-bms-final-schematic clickable-image"
-                              onClick={() => {
-                                setModalImage(project.bmsFinalDesign.sideImage)
-                                setModalAlt(project.bmsFinalDesign.sideImageAlt || 'Schematic')
-                              }}
-                            />
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                  {project.contributionsImages && project.contributionsImages.length > 0 && (
-                    <div className={`contributions-gallery-container${project.bmsFinalDesign ? ' contributions-gallery-container--after-bms' : ''}`}>
-                      {project.bmsFinalDesign && (
-                        <strong className="project-description-label">Version 1 BMS Design</strong>
-                      )}
-                      <ImageScroller
-                        items={project.contributionsImages}
-                        onImageClick={(src, alt) => {
-                          setModalImage(src)
-                          setModalAlt(alt || 'Contribution image')
-                        }}
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Mechanical and Electrical side by side */}
-          {(project.mechanical || (project.electrical && !project.contextElectricalSideBySide)) && (
-            <div className={`project-sections-grid${!project.mechanical && project.electrical ? ' project-sections-grid--electrical-only' : ''}`}>
-              {project.mechanical && (
-                <div className="project-section">
-                  {project.mechanicalImages && project.mechanicalImages.length > 0 ? (
-                    <div className="mechanical-images-scroller">
-                      <ImageScroller
-                        items={project.mechanicalImages}
-                        onImageClick={(src, alt) => {
-                          setModalImage(src)
-                          setModalAlt(alt || 'Mechanical system')
-                        }}
-                      />
-                    </div>
-                  ) : project.mechanicalGif ? (
-                    <div className="mechanical-gif-container">
-                      {project.mechanicalGif.endsWith('.mp4') || project.mechanicalGif.endsWith('.MP4') ? (
-                        <video 
-                          src={project.mechanicalGif} 
-                          className="mechanical-gif clickable-image"
-                          autoPlay
-                          loop
-                          playsInline
-                          muted
-                          onClick={() => {
-                            setModalImage(project.mechanicalGif)
-                            setModalAlt('Mechanical system demonstration')
-                          }}
-                        >
-                          Your browser does not support the video tag.
-                        </video>
-                      ) : (
-                        <img 
-                          src={project.mechanicalGif} 
-                          alt="Mechanical system demonstration" 
-                          className="mechanical-gif clickable-image"
-                          onClick={() => {
-                            setModalImage(project.mechanicalGif)
-                            setModalAlt('Mechanical system demonstration')
-                          }}
-                        />
-                      )}
-                    </div>
-                  ) : null}
-                  <h2 className="project-section-title">Mechanical</h2>
-                  <p>{project.mechanical}</p>
-                </div>
-              )}
-              {project.electrical && (
-                <div className={`project-section${!project.mechanical && (project.electricalSchematic || project.electricalImages?.length) ? ' project-section-electrical-with-image' : ''}`}>
-                  <div className="electrical-text-wrapper">
-                    <h2 className="project-section-title">Electrical</h2>
-                    <p className="project-section-electrical-p" dangerouslySetInnerHTML={{ __html: project.electrical }} />
-                  </div>
-                  {project.electricalImages && project.electricalImages.length > 0 ? (
-                    <div className="electrical-images-scroller">
-                      <ImageScroller
-                        items={project.electricalImages}
-                        onImageClick={(src, alt) => {
-                          setModalImage(src)
-                          setModalAlt(alt || 'Electrical schematic')
-                        }}
-                      />
-                    </div>
-                  ) : project.electricalSchematic ? (
-                    <div className="electrical-schematic-container">
-                      <img 
-                        src={project.electricalSchematic} 
-                        alt="Electrical schematic" 
-                        className="electrical-schematic clickable-image"
-                        onClick={() => {
-                          setModalImage(project.electricalSchematic)
-                          setModalAlt('Electrical schematic')
-                        }}
-                      />
-                    </div>
-                  ) : null}
-                </div>
-              )}
-            </div>
-          )}
-
-          {project.firmware && (
-            <div className="project-section">
-              <h2 className="project-section-title">Firmware</h2>
-              {project.firmware.description && (
-                <p>{project.firmware.description}</p>
-              )}
-              <div className="firmware-links-container">
-                {project.firmware.downloadLink && (
-                  <a 
-                    href={project.firmware.downloadLink} 
-                    download={project.firmware.fileName}
-                    className="firmware-download-link btn btn-primary"
-                  >
-                    Download Firmware
-                  </a>
-                )}
-                {project.firmware.githubLink && (
-                  <a 
-                    href={project.firmware.githubLink} 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="firmware-github-link btn btn-secondary"
-                  >
-                    View on GitHub
-                  </a>
-                )}
-              </div>
-            </div>
-          )}
-
-          {project.technologies && project.technologies.length > 0 && (
-            <div className="project-section">
-              <h2 className="project-section-title">Technologies Used</h2>
-              <div className="project-technologies">
-                {project.technologies.map((tech, index) => (
-                  <span key={index} className="tech-badge">{tech}</span>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-      <ImageModal 
-        imageSrc={modalImage}
-        alt={modalAlt}
-        isOpen={!!modalImage}
-        onClose={() => setModalImage(null)}
+        {tags.length > 0 && (
+          <ul className="pd-tags" aria-label="Technologies">
+            {tags.map((tag) => (
+              <li key={tag}>{tag}</li>
+            ))}
+          </ul>
+        )}
+      </main>
+      <ImageModal
+        imageSrc={modalItem?.src}
+        alt={modalItem?.alt}
+        isOpen={!!modalItem}
+        onClose={() => setModalItem(null)}
       />
     </div>
   )

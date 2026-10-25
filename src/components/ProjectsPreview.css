@@ -61,117 +61,7 @@
 }
 
 .project-preview-card {
-  flex: 0 0 350px;
-  background: var(--bg-primary);
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: block;
-  cursor: pointer;
-}
-
-.project-preview-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(30, 45, 36, 0.15);
-  border-color: var(--primary-color);
-}
-
-.project-preview-image {
-  width: 100%;
-  height: 250px;
-  overflow: hidden;
-  background: var(--bg-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.project-preview-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.project-image-placeholder {
-  width: 100%;
-  height: 100%;
-}
-
-.project-image-placeholder svg {
-  width: 100%;
-  height: 100%;
-}
-
-.project-preview-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--primary-color);
-  margin: 0;
-  text-align: center;
-}
-
-.project-preview-content {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.project-preview-type-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  z-index: 2;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 6px 14px rgba(25, 35, 30, 0.22);
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(2px);
-}
-
-.project-preview-type-hardware {
-  background: linear-gradient(135deg, #16a34a, #22c55e);
-}
-
-.project-preview-type-software {
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
-}
-
-.project-preview-type-fpga {
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
-}
-
-.project-preview-wip-badge {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  z-index: 2;
-  padding: 0.2rem 0.45rem;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
-  background: rgba(255, 255, 255, 0.88);
-  color: var(--text-secondary);
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  line-height: 1;
-  box-shadow: 0 1px 2px rgba(30, 45, 36, 0.06);
+  flex: 0 0 380px;
 }
 
 @media (max-width: 768px) {
@@ -193,10 +83,6 @@
   }
 
   .project-preview-card {
-    flex: 0 0 280px;
-  }
-
-  .project-preview-image {
-    height: 200px;
+    flex: 0 0 290px;
   }
 }

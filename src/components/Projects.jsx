@@ -1,49 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { projects, getProjectType } from '../data/projects'
+import { projects } from '../data/projects'
+import ProjectCard from './ProjectCard'
 import './Projects.css'
 
 const Projects = () => {
-  const getTypeClassName = (type) => {
-    if (type === 'Software') return 'project-type-software'
-    if (type === 'FPGA') return 'project-type-fpga'
-    return 'project-type-hardware'
-  }
-
   return (
     <section id="projects" className="projects section">
       <div className="container">
         <h2 className="section-title">Projects</h2>
         <div className="projects-grid">
-          {projects.map((project, index) => (
-            <Link key={index} to={project.link} className="project-card">
-              <div className="project-image">
-                <span className={`project-type-badge ${getTypeClassName(getProjectType(project.id))}`}>
-                  {getProjectType(project.id)}
-                </span>
-                {project.wip && (
-                  <span className="project-wip-badge" title="Work in progress">
-                    WIP
-                  </span>
-                )}
-                {project.image && !project.image.includes('placeholder') ? (
-                  <img src={project.image} alt={project.title} className="project-card-img" />
-                ) : (
-                  <div className="project-image-placeholder">
-                    <svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect width="600" height="400" fill="#f3f4f6"/>
-                      <text x="300" y="200" fontSize="20" fill="#334139" textAnchor="middle" fontWeight="500">
-                        {project.title}
-                      </text>
-                    </svg>
-                  </div>
-                )}
-              </div>
-              <div className="project-card-content">
-                <h3 className="project-title">{project.title}</h3>
-                <span className="project-link">View Project →</span>
-              </div>
-            </Link>
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </div>

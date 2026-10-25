@@ -13,7 +13,7 @@ const Resume = () => {
           <a 
             href="/resume.pdf" 
             className="btn btn-primary" 
-            download="HGAO_Resume_2026-2027.pdf"
+            download="HGAO_Resume_2027.pdf"
           >
             Download Resume
           </a>
