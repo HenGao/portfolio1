@@ -138,7 +138,9 @@ const ProjectDetailPage = () => {
 
           {project.projectOverviewVideo && (
             <section className="project-overview-video-section">
-              <h2 className="project-section-title">Project Overview</h2>
+              <h2 className="project-section-title">
+                {project.projectOverviewTitle || 'Project Overview'}
+              </h2>
               <div className="project-overview-video-container">
                 <video
                   src={project.projectOverviewVideo}
@@ -191,14 +193,15 @@ const ProjectDetailPage = () => {
             <div className="project-summary-section">
               <div className={project.contextElectricalSideBySide ? 'project-summary-row' : ''}>
                 <div className="project-description-item">
-                  <strong className="project-description-label">Context:</strong>
+                  <strong className="project-description-label">
+                    {(project.contextSectionLabel || 'Context')}:
+                  </strong>
                   {contextParagraphs.map((paragraph, index) => (
                     <p
                       key={index}
                       className={`project-full-description project-full-description--context${index > 0 ? ' project-full-description--context-follow' : ''}`}
-                    >
-                      {paragraph}
-                    </p>
+                      dangerouslySetInnerHTML={{ __html: paragraph }}
+                    />
                   ))}
                   {project.finalReportLink && (
                     <div className="project-github-link-container">
@@ -209,6 +212,18 @@ const ProjectDetailPage = () => {
                         className="project-github-link btn btn-secondary"
                       >
                         View final report (PDF)
+                      </a>
+                    </div>
+                  )}
+                  {project.websiteLink && (
+                    <div className="project-github-link-container">
+                      <a
+                        href={project.websiteLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-github-link btn btn-secondary"
+                      >
+                        Visit website
                       </a>
                     </div>
                   )}
@@ -251,11 +266,11 @@ const ProjectDetailPage = () => {
                   {Array.isArray(project.how) ? (
                     <ul className="project-description-list">
                       {project.how.map((item, index) => (
-                        <li key={index}>{item}</li>
+                        <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
                       ))}
                     </ul>
                   ) : (
-                    <p className="project-full-description">{project.how}</p>
+                    <p className="project-full-description" dangerouslySetInnerHTML={{ __html: project.how }} />
                   )}
                 </div>
               )}
@@ -344,7 +359,17 @@ const ProjectDetailPage = () => {
             <div className={`project-sections-grid${!project.mechanical && project.electrical ? ' project-sections-grid--electrical-only' : ''}`}>
               {project.mechanical && (
                 <div className="project-section">
-                  {project.mechanicalGif && (
+                  {project.mechanicalImages && project.mechanicalImages.length > 0 ? (
+                    <div className="mechanical-images-scroller">
+                      <ImageScroller
+                        items={project.mechanicalImages}
+                        onImageClick={(src, alt) => {
+                          setModalImage(src)
+                          setModalAlt(alt || 'Mechanical system')
+                        }}
+                      />
+                    </div>
+                  ) : project.mechanicalGif ? (
                     <div className="mechanical-gif-container">
                       {project.mechanicalGif.endsWith('.mp4') || project.mechanicalGif.endsWith('.MP4') ? (
                         <video 
@@ -373,18 +398,28 @@ const ProjectDetailPage = () => {
                         />
                       )}
                     </div>
-                  )}
+                  ) : null}
                   <h2 className="project-section-title">Mechanical</h2>
                   <p>{project.mechanical}</p>
                 </div>
               )}
               {project.electrical && (
-                <div className={`project-section${!project.mechanical && project.electricalSchematic ? ' project-section-electrical-with-image' : ''}`}>
+                <div className={`project-section${!project.mechanical && (project.electricalSchematic || project.electricalImages?.length) ? ' project-section-electrical-with-image' : ''}`}>
                   <div className="electrical-text-wrapper">
                     <h2 className="project-section-title">Electrical</h2>
                     <p className="project-section-electrical-p" dangerouslySetInnerHTML={{ __html: project.electrical }} />
                   </div>
-                  {project.electricalSchematic && (
+                  {project.electricalImages && project.electricalImages.length > 0 ? (
+                    <div className="electrical-images-scroller">
+                      <ImageScroller
+                        items={project.electricalImages}
+                        onImageClick={(src, alt) => {
+                          setModalImage(src)
+                          setModalAlt(alt || 'Electrical schematic')
+                        }}
+                      />
+                    </div>
+                  ) : project.electricalSchematic ? (
                     <div className="electrical-schematic-container">
                       <img 
                         src={project.electricalSchematic} 
@@ -396,7 +431,7 @@ const ProjectDetailPage = () => {
                         }}
                       />
                     </div>
-                  )}
+                  ) : null}
                 </div>
               )}
             </div>

@@ -46,6 +46,8 @@ const ImageScroller = ({ items, onImageClick }) => {
                 src={src} 
                 className="scroller-media"
                 controls
+                autoPlay
+                muted
                 loop
                 playsInline
               >

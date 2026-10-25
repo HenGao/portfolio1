@@ -1,5 +1,94 @@
 export const projects = [
   {
+    id: 'parker',
+    title: 'Parker',
+    link: '/projects/parker',
+    image: '/parker.png',
+    additionalImages: [
+      { type: 'video', src: '/parker/operating-demo.mp4' },
+      { type: 'video', src: '/parker/spin-render.mp4' },
+      '/parker/pcb.png'
+    ],
+    websiteLink: 'https://whitepepper.tools/',
+    description:
+      'Parker — a soldering iron with a built-in tip camera from White Pepper Tools.',
+    contextSectionLabel: 'What?',
+    fullDescription:
+      'Building Parker, “the better soldering iron”: a soldering iron with a small camera in the barrel that looks straight down at the tip, so the joint shows up close, sharp, and lit on a laptop, tablet, or VR headset — no microscope hunch.',
+    how: [
+      'Developing a tip-mounted camera path so the view stays on the joint without hands or smoke blocking the shot.',
+      'Streaming the tip feed to laptop, tablet, or VR for magnified soldering without a bench microscope.',
+      'Designing a custom <strong>White Pepper</strong> PCB for power, controls, and wireless connectivity.',
+      'Launching through <strong>White Pepper Tools</strong> at whitepepper.tools with a waitlist while the product is still coming soon.'
+    ],
+    resultsSectionLabel: 'Results',
+    results: [
+      'Public product site and waitlist live at whitepepper.tools.',
+      'Hardware is in progress — Parker is not shipping yet.'
+    ],
+    technologies: [
+      'Embedded Camera',
+      'PCB Design',
+      'Soldering Tools',
+      'Hardware Product',
+      'Product Design'
+    ],
+    mechanical: '',
+    electricalSchematic: '/parker/pcb.png',
+    electrical:
+      'Custom long-form PCB branded <strong>white pepper</strong>, with USB connectivity, onboard regulation, user buttons, status indicators, and a wireless module with PCB antenna.',
+    firmware: null,
+    wip: true
+  },
+  {
+    id: 'hydrolet',
+    title: 'Hydrolet: Hydration remind for dementia patients',
+    link: '/projects/hydrolet',
+    image: '/hydrolet.png',
+    additionalImages: [
+      '/hydrolet/band.png',
+      '/hydrolet/coaster.png'
+    ],
+    githubLink: 'https://github.com/ConnorFriedman10/Hydrolet',
+    description:
+      'A smart bracelet and illuminated coaster system that reminds dementia patients to stay hydrated.',
+    contextSectionLabel: 'What?',
+    fullDescription:
+      'Collaborated on a hydration reminder system for dementia patients: a wearable band that buzzes when it is time to drink, a smart coaster that measures intake, and a caregiver app that keeps family informed.',
+    how: [
+      'Designed 3D-printed <strong>band</strong> and <strong>coaster</strong> housings for an <strong>ESP32</strong>, <strong>LiPo battery</strong>, LED, and vibration motor.',
+      'Integrated four <strong>load cells</strong> and an <strong>LED ring</strong> on the coaster to sense cup weight and provide visual cues.',
+      'Wrote <strong>PlatformIO</strong> firmware for both devices with a shared <strong>BLE</strong> protocol; coaster uses <strong>Wi-Fi</strong> to talk to the cloud.',
+      'Connected hardware to a <strong>React</strong> caregiver PWA and <strong>Supabase</strong> backend for device data and push notifications.'
+    ],
+    resultsSectionLabel: 'Results',
+    results: [
+      'Built a working end-to-end prototype linking band reminders, coaster sensing, and caregiver monitoring.',
+      'Published the hardware, firmware, and app stack in a shared monorepo for continued development.'
+    ],
+    technologies: [
+      'XIAO nRF',
+      'ESP32',
+      'PlatformIO',
+      'BLE',
+      'Wi-Fi',
+      'Load Cells',
+      'LED Strip',
+      'Haptic Feedback',
+      '3D Printing',
+      'React',
+      'Supabase'
+    ],
+    mechanical: '',
+    electricalImages: [
+      '/hydrolet/bracelet-schematic.png',
+      '/hydrolet/coaster-schematic.png'
+    ],
+    electrical:
+      'Bracelet electronics use a <strong>Seeed XIAO nRF</strong> on a <strong>150 mAh</strong> battery: <strong>D10</strong> drives a vibration motor through a <strong>PN2222A</strong> with a flyback diode; <strong>D2</strong> drives a status LED. The coaster uses a <strong>XIAO ESP32-C3</strong> with an <strong>HX711</strong> load-cell amp (<strong>D3/D4</strong>) and an LED module powered from the 5V rail.',
+    firmware: null
+  },
+  {
     id: 'helping-hand',
     title: 'Helping Hand',
     link: '/projects/helping-hand',
@@ -46,68 +135,6 @@ export const projects = [
     electrical:
       'Electrical design covers sensor and compute interconnect, arm driver power, and a consolidated battery/power distribution approach sized for portable use on the chair.',
     firmware: null
-  },
-  {
-    id: 'okclaw',
-    title: 'OkClaw: AI Agent Dating',
-    link: '/projects/okclaw',
-    image: '/okclaw.png',
-    centerMainImage: true,
-    githubLink: 'https://github.com/HenGao/OkClaw',
-    description:
-      'Next.js MVP for an AI “dating” network—agent profiles, discovery, live date sessions, matches, and history—built toward a Supabase-backed stack.',
-    fullDescription: [
-      'OkClaw is an exploration into AI-to-AI connection. I was inspired to create this project after seeing the success of MoltBook. I believe that AI-to-AI interaction with no human intervention is the next step in the natural development of artificial intelligence, and I wanted to explore social networks built solely for AI.',
-      'In OkClaw your agent can create profiles, discover others, run date sessions, and can eventually team up on missions. The current app is a Next.js 16 + React 19 + TypeScript + Tailwind frontend with a rich domain model (agents, matches, signals, compatibility, transcript lines, history, missions) and mock data. Routes cover a playable home “Live Date” flow (stepped transcript, signal and compatibility panels, verdict UI), a Discover grid, profile, matches, and history. The repo documents a production path using Supabase (Postgres, RLS, auth, realtime), optional queue workers for missions, and Vercel for hosting, plus a security checklist aligned with agent-network style products.'
-    ],
-    how: [
-      'Modeled agent profiles, match state, date formats, conversation transcripts, per-date signals, compatibility axes, history entries, and future mission types in shared TypeScript types.',
-      'Shipped multi-page UI: Live Date on the home route, Discover, profile, matches, and history, using client components where interaction is required (e.g. transcript playback and verdicts).',
-      'Implemented the Live Date surface with timed transcript reveal, live/concluded banner state, dual agent cards, and outcome flow driven by mock conversation and scoring data.',
-      'Captured deployment and backend direction in README: Vercel for the app, Supabase for data and auth, realtime for sessions, and rate limiting / RLS guidance for a safe public launch.'
-    ],
-    results: '',
-    technologies: [
-      'Next.js',
-      'React',
-      'TypeScript',
-      'Tailwind CSS',
-      'Vercel',
-      'Supabase (planned)'
-    ],
-    mechanical: '',
-    electrical: '',
-    firmware: null,
-    wip: true
-  },
-  {
-    id: 'runna-stick',
-    title: 'Runna Stick',
-    link: '/projects/runna-stick',
-    image: '/runna-stick.png',
-    centerMainImage: true,
-    description:
-      'A smart wearable for Strava—hydration, run stats, form feedback via haptics, and tap-to-friend on Strava.',
-    heroDescription:
-      'A smart wearable designed to make Strava integration smarter, easier, and more social. Regulates your sweat to track hydration, allows users to track running statistics, regulates the user\'s form through haptic feedback, and allows users to friend each other on Strava by touching the sticks together.',
-    fullDescription: 'Details coming soon.',
-    currentProgress: {
-      title: 'Current progress',
-      items: [
-        {
-          label: 'Current MCU design:',
-          image: '/runna-stick/mcu-design.png',
-          alt: 'nRF52840 MCU schematic'
-        }
-      ]
-    },
-    how: [],
-    results: '',
-    technologies: [],
-    mechanical: '',
-    electrical: '',
-    firmware: null,
-    wip: true
   },
   {
     id: 'smart-plug',
@@ -160,8 +187,7 @@ export const projects = [
     technologies: [],
     mechanical: '',
     electrical: '',
-    firmware: null,
-    wip: true
+    firmware: null
   },
   {
     id: 'grover',
@@ -464,6 +490,68 @@ export const projects = [
     mechanical: '',
     electrical: '',
     firmware: null
+  },
+  {
+    id: 'runna-stick',
+    title: 'Runna Stick',
+    link: '/projects/runna-stick',
+    image: '/runna-stick.png',
+    centerMainImage: true,
+    description:
+      'A smart wearable for Strava—hydration, run stats, form feedback via haptics, and tap-to-friend on Strava.',
+    heroDescription:
+      'A smart wearable designed to make Strava integration smarter, easier, and more social. Regulates your sweat to track hydration, allows users to track running statistics, regulates the user\'s form through haptic feedback, and allows users to friend each other on Strava by touching the sticks together.',
+    fullDescription: 'Details coming soon.',
+    currentProgress: {
+      title: 'Current progress',
+      items: [
+        {
+          label: 'Current MCU design:',
+          image: '/runna-stick/mcu-design.png',
+          alt: 'nRF52840 MCU schematic'
+        }
+      ]
+    },
+    how: [],
+    results: '',
+    technologies: [],
+    mechanical: '',
+    electrical: '',
+    firmware: null,
+    wip: true
+  },
+  {
+    id: 'okclaw',
+    title: 'OkClaw: AI Agent Dating',
+    link: '/projects/okclaw',
+    image: '/okclaw.png',
+    centerMainImage: true,
+    githubLink: 'https://github.com/HenGao/OkClaw',
+    description:
+      'Next.js MVP for an AI “dating” network—agent profiles, discovery, live date sessions, matches, and history—built toward a Supabase-backed stack.',
+    fullDescription: [
+      'OkClaw is an exploration into AI-to-AI connection. I was inspired to create this project after seeing the success of MoltBook. I believe that AI-to-AI interaction with no human intervention is the next step in the natural development of artificial intelligence, and I wanted to explore social networks built solely for AI.',
+      'In OkClaw your agent can create profiles, discover others, run date sessions, and can eventually team up on missions. The current app is a Next.js 16 + React 19 + TypeScript + Tailwind frontend with a rich domain model (agents, matches, signals, compatibility, transcript lines, history, missions) and mock data. Routes cover a playable home “Live Date” flow (stepped transcript, signal and compatibility panels, verdict UI), a Discover grid, profile, matches, and history. The repo documents a production path using Supabase (Postgres, RLS, auth, realtime), optional queue workers for missions, and Vercel for hosting, plus a security checklist aligned with agent-network style products.'
+    ],
+    how: [
+      'Modeled agent profiles, match state, date formats, conversation transcripts, per-date signals, compatibility axes, history entries, and future mission types in shared TypeScript types.',
+      'Shipped multi-page UI: Live Date on the home route, Discover, profile, matches, and history, using client components where interaction is required (e.g. transcript playback and verdicts).',
+      'Implemented the Live Date surface with timed transcript reveal, live/concluded banner state, dual agent cards, and outcome flow driven by mock conversation and scoring data.',
+      'Captured deployment and backend direction in README: Vercel for the app, Supabase for data and auth, realtime for sessions, and rate limiting / RLS guidance for a safe public launch.'
+    ],
+    results: '',
+    technologies: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'Vercel',
+      'Supabase (planned)'
+    ],
+    mechanical: '',
+    electrical: '',
+    firmware: null,
+    wip: true
   }
 ]
 
