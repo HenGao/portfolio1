@@ -1,4 +1,16 @@
+.pcard-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+.pcard-wrap:hover {
+  transform: translateY(-3px);
+}
+
 .pcard {
+  flex: 1;
   display: flex;
   flex-direction: column;
   background: #FFFFFF;
@@ -7,11 +19,10 @@
   overflow: hidden;
   font-family: 'Inter', system-ui, sans-serif;
   color: #18181B;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
 }
 
-.pcard:hover {
-  transform: translateY(-3px);
+.pcard-wrap:hover .pcard {
   box-shadow: 0 10px 24px rgba(24, 24, 27, 0.08);
 }
 
@@ -98,6 +109,6 @@
   transition: transform 0.2s ease;
 }
 
-.pcard:hover .pcard-link svg {
+.pcard-wrap:hover .pcard-link svg {
   transform: translateX(3px);
 }

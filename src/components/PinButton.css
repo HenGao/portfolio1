@@ -1,0 +1,34 @@
+.pin-button {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 2px 8px rgba(24, 24, 27, 0.12);
+  backdrop-filter: blur(4px);
+  color: #3F3F46;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.pin-button:hover {
+  color: #18181B;
+  transform: scale(1.06);
+}
+
+.pin-button:focus-visible {
+  outline: 2px solid #15803D;
+  outline-offset: 2px;
+}
+
+.pin-button.is-pinned {
+  background: #15803D;
+  color: #FFFFFF;
+}

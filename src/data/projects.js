@@ -30,13 +30,13 @@ export const projects = [
       'Hardware is still in progress and not shipping yet.'
     ],
     links: [{ label: 'Visit whitepepper.tools', href: 'https://whitepepper.tools/' }],
-    electrical: {
-      headline: 'Custom long-form PCB',
-      text: 'A <strong>White Pepper</strong> board with <strong>USB</strong>, onboard regulation, user buttons, status LEDs and a <strong>wireless module with a PCB antenna</strong>.',
-      figures: [
-        { src: '/parker/pcb.png', caption: 'White Pepper PCB', alt: 'White Pepper PCB render', bg: '#B9BAD0' }
-      ]
-    },
+    // electrical: {
+    //   headline: 'Custom long-form PCB',
+    //   text: 'A <strong>White Pepper</strong> board with <strong>USB</strong>, onboard regulation, user buttons, status LEDs and a <strong>wireless module with a PCB antenna</strong>.',
+    //   figures: [
+    //     { src: '/parker/pcb.png', caption: 'White Pepper PCB', alt: 'White Pepper PCB render', bg: '#B9BAD0' }
+    //   ]
+    // },
     tags: ['Embedded camera', 'PCB design', 'Wireless', 'Product design']
   },
   {
@@ -185,6 +185,115 @@ export const projects = [
     tags: ['Altium', 'Battery management', 'PCB design', 'Power electronics', 'JLCPCB', 'Team leadership']
   },
   {
+    id: 'project-two',
+    link: '/projects/project-two',
+    name: 'Green Tower',
+    subtitle: 'Modular indoor hydroponics tower',
+    category: 'Hardware',
+    status: 'Generate, 2025',
+    image: '/green-tower.png',
+    images: [
+      { src: '/green-tower.png', caption: 'Product render', alt: 'Green Tower render', bg: '#E6E6E6' },
+      { src: '/green-tower-4.png', caption: 'At the showcase', alt: 'Henry with the finished Green Tower at the showcase', fit: 'cover' },
+      { type: 'video', src: '/green-tower-rotation.mp4', caption: 'Rotating render', alt: 'Green Tower rotating render', bg: '#E6E6E6' },
+      { src: '/green-tower-pcb-3d.png', caption: 'Main PCBA', alt: 'Main PCBA 3D render', bg: '#C8C8C8' }
+    ],
+    what: [
+      'A <strong>modular indoor hydroponics tower</strong> that automates watering, nutrients and lighting to make growing at home easier and cheaper. Built with a team of 12 engineers.'
+    ],
+    how: [
+      'An <strong>ESP32</strong> reads <strong>pH, EC, water level and humidity</strong> sensors and controls water dispensing over <strong>SPI, UART and I2C</strong>.',
+      'A <strong>main PCBA</strong> powers five sensors, the UV lights, nutrient delivery and motors.',
+      'The <strong>3D-printed modular shell</strong> has foldable UV lights, plant pods and pull-out nutrient drawers.'
+    ],
+    results: [
+      'Designed the <strong>pH sensing circuit from scratch</strong>: it reads the sensor’s analog signal, filters it and sends it to the MCU over SPI.',
+      'Designed the <strong>motor and LED</strong> schematics and layouts, and tested the boards with an oscilloscope and continuity checks.'
+    ],
+    links: [{ label: 'View on GitHub', href: 'https://github.com/GenerateNU/cedar' }],
+    electrical: {
+      headline: 'Main PCBA and pH sensing',
+      text: 'A main PCBA powers five sensors, the UV lights, nutrient delivery and motors, with an <strong>ESP32</strong> talking over <strong>SPI, UART and I2C</strong>. My <strong>pH sensing circuit</strong> filters the sensor’s analog signal before it reaches the MCU.',
+      figures: [
+        { src: '/green-tower-ph-schematic.png', caption: 'pH sensing schematic', alt: 'pH sensing circuit schematic', bg: '#FFFFFF' },
+        { src: '/green-tower-pcb.png', caption: 'PCB layout', alt: 'Green Tower PCB layout', bg: '#C8C8C8' }
+      ]
+    },
+    tags: ['ESP32', 'Altium', 'PCB design', 'pH sensing', 'SPI', 'I2C', 'UART', '3D printing']
+  },
+  {
+    id: 'project-one',
+    link: '/projects/project-one',
+    name: 'MIRA Smart Mirror',
+    subtitle: 'Self-cleaning mirror that blow-dries your hair',
+    category: 'Hardware',
+    status: 'Forge, 2025',
+    image: '/mira-smart-mirror-2.png',
+    cardFit: 'contain',
+    cardBg: '#E8E8EA',
+    images: [
+      { src: '/mira-smart-mirror-2.png', caption: 'The finished mirror at Forge', alt: 'MIRA smart mirror with the Forge logo on its top housing', bg: '#E8E8EA' },
+      { type: 'video', src: '/mira-wiping-demo.mp4', caption: 'Self-cleaning wiper', alt: 'MIRA wiper cleaning the mirror', fit: 'cover' },
+      { src: '/mira-smart-mirror-1.png', caption: 'Testing with the team', alt: 'The team reflected in the MIRA frame', fit: 'cover' },
+      { src: '/mira-smart-mirror-3.png', caption: 'Electronics on the back panel', alt: 'MIRA electronics wired up on the back panel', fit: 'cover' }
+    ],
+    what: [
+      'A <strong>smart bathroom mirror</strong> that defogs and <strong>cleans itself</strong>, <strong>blow-dries your hair</strong>, and shows the weather, time and temperature. I led a team of 6 engineers to build it for the <strong>Forge 2025 Fall Showcase</strong>.'
+    ],
+    how: [
+      'Built the electronics around an <strong>ESP32</strong> that reads sensors over <strong>I2C, SPI and UART</strong> and pulls local conditions from a <strong>weather API</strong>.',
+      'Drove a <strong>linear actuator wiper</strong> with stepper drivers, switched the defog fans with <strong>relays</strong>, and regulated power with buck converters.',
+      'Shaped the hair-drying air channel with <strong>SOLIDWORKS Flow Simulation</strong>.'
+    ],
+    results: [
+      'A working mirror that <strong>cleans itself, dries hair and shows live local data</strong>.',
+      'Pitched at the Forge 2025 Fall Showcase to positive feedback from judges and attendees.'
+    ],
+    links: [{ label: 'Download firmware', href: '/firmware/mirafirmware.ino', download: 'mirafirmware.ino' }],
+    electrical: {
+      headline: 'One ESP32 runs everything',
+      text: 'An <strong>ESP32</strong> coordinates the whole mirror: <strong>relays</strong> switch the defog fans, <strong>stepper drivers</strong> move the wiper, <strong>buck converters</strong> regulate power, and <strong>I2C</strong> sensors track temperature and humidity.',
+      figures: [
+        { src: '/mira-schematic.png', caption: 'Electrical schematic', alt: 'MIRA electrical schematic', bg: '#FFFFFF' }
+      ]
+    },
+    tags: ['ESP32', 'C++', 'Linear actuator', 'Stepper motors', 'Relays', 'Buck converters', 'SOLIDWORKS', '3D printing']
+  },
+  {
+    id: 'project-three',
+    link: '/projects/project-three',
+    name: 'Optimus',
+    subtitle: 'Cable reliability test robot for Philips',
+    category: 'Hardware',
+    status: 'Philips co-op, 2024',
+    image: '/optimus-hero-shot.png',
+    images: [
+      { src: '/optimus-hero-shot.png', caption: 'Optimus test rig', alt: 'Optimus test robot with force readout and emergency stop', fit: 'cover' },
+      { src: '/optimus-mechanical.png', caption: 'Mechanical design', alt: 'Optimus mechanical design' },
+      { type: 'youtube', src: 'https://www.youtube.com/watch?v=V9r8V0G7k2I', caption: 'User guide I made', alt: 'Optimus user guide video' }
+    ],
+    what: [
+      'A <strong>reliability test robot</strong> I designed during my <strong>Philips co-op</strong>. It mates and unmates ECG and SpO2 cables tens of thousands of times to prove new products hold up.'
+    ],
+    how: [
+      'Wrote the whole software stack in <strong>LabVIEW</strong>, including my own <strong>motor driver and UI</strong>.',
+      'Designed the mechanics in <strong>SOLIDWORKS</strong> and made the parts on Philips’ in-house <strong>CNC</strong> and 3D printers.',
+      'An <strong>Arduino R4</strong> reads the sensors and syncs the rotational and linear motion.'
+    ],
+    results: [
+      'Ran <strong>35,000 test cycles</strong> while recording force values.',
+      'Made the <strong>user guide video</strong> above so other engineers can run it.'
+    ],
+    electrical: {
+      headline: 'LabVIEW in the loop',
+      text: 'Sensor data goes to a computer running <strong>LabVIEW</strong>, which processes it and sends commands to an <strong>Arduino</strong> that turns them into linear and rotational motion.',
+      figures: [
+        { src: '/optimus-electrical-diagram.png', caption: 'Electrical diagram', alt: 'Optimus electrical diagram', bg: '#FFFFFF' }
+      ]
+    },
+    tags: ['LabVIEW', 'Arduino', 'SOLIDWORKS', 'CNC', 'Linear slide', 'Strain gauge', '3D printing']
+  },
+  {
     id: 'fpga-ar',
     link: '/projects/fpga-ar',
     name: 'FPGA AR',
@@ -249,113 +358,6 @@ export const projects = [
     ],
     links: [{ label: 'View on GitHub', href: 'https://github.com/HenGao/kalshibot' }],
     tags: ['Python', 'Pandas', 'NumPy', 'scikit-learn', 'Flask', 'Kalshi API', 'Algorithmic trading']
-  },
-  {
-    id: 'project-one',
-    link: '/projects/project-one',
-    name: 'MIRA Smart Mirror',
-    subtitle: 'Self-cleaning mirror that blow-dries your hair',
-    category: 'Hardware',
-    status: 'Forge, 2025',
-    image: '/mira-smart-mirror-2.png',
-    images: [
-      { src: '/mira-smart-mirror-2.png', caption: 'The finished mirror at Forge', alt: 'MIRA smart mirror with the Forge logo on its top housing', bg: '#E8E8EA' },
-      { type: 'video', src: '/mira-wiping-demo.mp4', caption: 'Self-cleaning wiper', alt: 'MIRA wiper cleaning the mirror', fit: 'cover' },
-      { src: '/mira-smart-mirror-1.png', caption: 'Testing with the team', alt: 'The team reflected in the MIRA frame', fit: 'cover' },
-      { src: '/mira-smart-mirror-3.png', caption: 'Electronics on the back panel', alt: 'MIRA electronics wired up on the back panel', fit: 'cover' }
-    ],
-    what: [
-      'A <strong>smart bathroom mirror</strong> that defogs and <strong>cleans itself</strong>, <strong>blow-dries your hair</strong>, and shows the weather, time and temperature. I led a team of 6 engineers to build it for the <strong>Forge 2025 Fall Showcase</strong>.'
-    ],
-    how: [
-      'Built the electronics around an <strong>ESP32</strong> that reads sensors over <strong>I2C, SPI and UART</strong> and pulls local conditions from a <strong>weather API</strong>.',
-      'Drove a <strong>linear actuator wiper</strong> with stepper drivers, switched the defog fans with <strong>relays</strong>, and regulated power with buck converters.',
-      'Shaped the hair-drying air channel with <strong>SOLIDWORKS Flow Simulation</strong>.'
-    ],
-    results: [
-      'A working mirror that <strong>cleans itself, dries hair and shows live local data</strong>.',
-      'Pitched at the Forge 2025 Fall Showcase to positive feedback from judges and attendees.'
-    ],
-    links: [{ label: 'Download firmware', href: '/firmware/mirafirmware.ino', download: 'mirafirmware.ino' }],
-    electrical: {
-      headline: 'One ESP32 runs everything',
-      text: 'An <strong>ESP32</strong> coordinates the whole mirror: <strong>relays</strong> switch the defog fans, <strong>stepper drivers</strong> move the wiper, <strong>buck converters</strong> regulate power, and <strong>I2C</strong> sensors track temperature and humidity.',
-      figures: [
-        { src: '/mira-schematic.png', caption: 'Electrical schematic', alt: 'MIRA electrical schematic', bg: '#FFFFFF' }
-      ]
-    },
-    tags: ['ESP32', 'C++', 'Linear actuator', 'Stepper motors', 'Relays', 'Buck converters', 'SOLIDWORKS', '3D printing']
-  },
-  {
-    id: 'project-two',
-    link: '/projects/project-two',
-    name: 'Green Tower',
-    subtitle: 'Modular indoor hydroponics tower',
-    category: 'Hardware',
-    status: 'Generate, 2025',
-    image: '/green-tower.png',
-    images: [
-      { src: '/green-tower.png', caption: 'Product render', alt: 'Green Tower render', bg: '#E6E6E6' },
-      { src: '/green-tower-4.png', caption: 'At the showcase', alt: 'Henry with the finished Green Tower at the showcase', fit: 'cover' },
-      { type: 'video', src: '/green-tower-rotation.mp4', caption: 'Rotating render', alt: 'Green Tower rotating render', bg: '#E6E6E6' },
-      { src: '/green-tower-pcb-3d.png', caption: 'Main PCBA', alt: 'Main PCBA 3D render', bg: '#C8C8C8' }
-    ],
-    what: [
-      'A <strong>modular indoor hydroponics tower</strong> that automates watering, nutrients and lighting to make growing at home easier and cheaper. Built with a team of 12 engineers.'
-    ],
-    how: [
-      'An <strong>ESP32</strong> reads <strong>pH, EC, water level and humidity</strong> sensors and controls water dispensing over <strong>SPI, UART and I2C</strong>.',
-      'A <strong>main PCBA</strong> powers five sensors, the UV lights, nutrient delivery and motors.',
-      'The <strong>3D-printed modular shell</strong> has foldable UV lights, plant pods and pull-out nutrient drawers.'
-    ],
-    results: [
-      'Designed the <strong>pH sensing circuit from scratch</strong>: it reads the sensor’s analog signal, filters it and sends it to the MCU over SPI.',
-      'Designed the <strong>motor and LED</strong> schematics and layouts, and tested the boards with an oscilloscope and continuity checks.'
-    ],
-    links: [{ label: 'View on GitHub', href: 'https://github.com/GenerateNU/cedar' }],
-    electrical: {
-      headline: 'Main PCBA and pH sensing',
-      text: 'A main PCBA powers five sensors, the UV lights, nutrient delivery and motors, with an <strong>ESP32</strong> talking over <strong>SPI, UART and I2C</strong>. My <strong>pH sensing circuit</strong> filters the sensor’s analog signal before it reaches the MCU.',
-      figures: [
-        { src: '/green-tower-ph-schematic.png', caption: 'pH sensing schematic', alt: 'pH sensing circuit schematic', bg: '#FFFFFF' },
-        { src: '/green-tower-pcb.png', caption: 'PCB layout', alt: 'Green Tower PCB layout', bg: '#C8C8C8' }
-      ]
-    },
-    tags: ['ESP32', 'Altium', 'PCB design', 'pH sensing', 'SPI', 'I2C', 'UART', '3D printing']
-  },
-  {
-    id: 'project-three',
-    link: '/projects/project-three',
-    name: 'Optimus',
-    subtitle: 'Cable reliability test robot for Philips',
-    category: 'Hardware',
-    status: 'Philips co-op, 2024',
-    image: '/optimus-hero-shot.png',
-    images: [
-      { src: '/optimus-hero-shot.png', caption: 'Optimus test rig', alt: 'Optimus test robot with force readout and emergency stop', fit: 'cover' },
-      { src: '/optimus-mechanical.png', caption: 'Mechanical design', alt: 'Optimus mechanical design' },
-      { type: 'youtube', src: 'https://www.youtube.com/watch?v=V9r8V0G7k2I', caption: 'User guide I made', alt: 'Optimus user guide video' }
-    ],
-    what: [
-      'A <strong>reliability test robot</strong> I designed during my <strong>Philips co-op</strong>. It mates and unmates ECG and SpO2 cables tens of thousands of times to prove new products hold up.'
-    ],
-    how: [
-      'Wrote the whole software stack in <strong>LabVIEW</strong>, including my own <strong>motor driver and UI</strong>.',
-      'Designed the mechanics in <strong>SOLIDWORKS</strong> and made the parts on Philips’ in-house <strong>CNC</strong> and 3D printers.',
-      'An <strong>Arduino R4</strong> reads the sensors and syncs the rotational and linear motion.'
-    ],
-    results: [
-      'Ran <strong>35,000 test cycles</strong> while recording force values.',
-      'Made the <strong>user guide video</strong> above so other engineers can run it.'
-    ],
-    electrical: {
-      headline: 'LabVIEW in the loop',
-      text: 'Sensor data goes to a computer running <strong>LabVIEW</strong>, which processes it and sends commands to an <strong>Arduino</strong> that turns them into linear and rotational motion.',
-      figures: [
-        { src: '/optimus-electrical-diagram.png', caption: 'Electrical diagram', alt: 'Optimus electrical diagram', bg: '#FFFFFF' }
-      ]
-    },
-    tags: ['LabVIEW', 'Arduino', 'SOLIDWORKS', 'CNC', 'Linear slide', 'Strain gauge', '3D printing']
   },
   {
     id: 'project-four',
