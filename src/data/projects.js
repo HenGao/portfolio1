@@ -34,7 +34,7 @@ export const projects = [
       headline: 'Custom long-form PCB',
       text: 'A <strong>White Pepper</strong> board with <strong>USB</strong>, onboard regulation, user buttons, status LEDs and a <strong>wireless module with a PCB antenna</strong>.',
       figures: [
-        { src: '/parker/pcb-top.png', caption: 'White Pepper PCB', alt: 'White Pepper PCB render, top side, with traces hidden', bg: '#F4F4F5', badge: 'Traceless' }
+        // { src: '/parker/pcb-top.png', caption: 'White Pepper PCB', alt: 'White Pepper PCB render, top side, with traces hidden', bg: '#F4F4F5', badge: 'Traceless' }
       ],
       wide: true
     },
