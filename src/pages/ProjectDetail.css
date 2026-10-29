@@ -114,6 +114,21 @@
   overflow: hidden;
 }
 
+.pd-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #F4F4F5;
+  border: 1px solid #E4E4E7;
+  color: #52525B;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: 1px;
+}
+
 .pd-zoom {
   display: block;
   width: 100%;
@@ -230,6 +245,22 @@
 
 .pd-sub--split .pd-frame--figure {
   height: 340px;
+}
+
+.pd-sub--wide .pd-sub-figures {
+  grid-template-columns: 1fr;
+}
+
+.pd-sub--wide .pd-frame--figure {
+  height: 300px;
+  padding: 24px;
+}
+
+@media (max-width: 680px) {
+  .pd-sub--wide .pd-frame--figure {
+    height: 160px;
+    padding: 12px;
+  }
 }
 
 .pd-text {

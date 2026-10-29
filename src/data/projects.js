@@ -30,13 +30,14 @@ export const projects = [
       'Hardware is still in progress and not shipping yet.'
     ],
     links: [{ label: 'Visit whitepepper.tools', href: 'https://whitepepper.tools/' }],
-    // electrical: {
-    //   headline: 'Custom long-form PCB',
-    //   text: 'A <strong>White Pepper</strong> board with <strong>USB</strong>, onboard regulation, user buttons, status LEDs and a <strong>wireless module with a PCB antenna</strong>.',
-    //   figures: [
-    //     { src: '/parker/pcb.png', caption: 'White Pepper PCB', alt: 'White Pepper PCB render', bg: '#B9BAD0' }
-    //   ]
-    // },
+    electrical: {
+      headline: 'Custom long-form PCB',
+      text: 'A <strong>White Pepper</strong> board with <strong>USB</strong>, onboard regulation, user buttons, status LEDs and a <strong>wireless module with a PCB antenna</strong>.',
+      figures: [
+        { src: '/parker/pcb-top.png', caption: 'White Pepper PCB', alt: 'White Pepper PCB render, top side, with traces hidden', bg: '#F4F4F5', badge: 'Traceless' }
+      ],
+      wide: true
+    },
     tags: ['Embedded camera', 'PCB design', 'Wireless', 'Product design']
   },
   {

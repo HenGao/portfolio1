@@ -105,7 +105,7 @@ const Gallery = ({ images, onOpen }) => {
 const Subsystem = ({ section, onOpen }) => {
   const figures = section.figures || []
   return (
-    <section className={`pd-sub${figures.length === 1 ? ' pd-sub--split' : ''}`}>
+    <section className={`pd-sub${section.wide ? ' pd-sub--wide' : figures.length === 1 ? ' pd-sub--split' : ''}`}>
       <div className="pd-sub-text">
         <h2>{section.label || 'Electrical'}</h2>
         {section.headline && <p className="pd-sub-headline">{section.headline}</p>}
@@ -118,7 +118,12 @@ const Subsystem = ({ section, onOpen }) => {
               <div className="pd-frame pd-frame--figure" style={frameStyle({ bg: figure.bg || '#FFFFFF' })}>
                 <Media item={figure} onOpen={onOpen} />
               </div>
-              {figure.caption && <figcaption>{figure.caption}</figcaption>}
+              {figure.caption && (
+                <figcaption>
+                  {figure.caption}
+                  {figure.badge && <span className="pd-badge">{figure.badge}</span>}
+                </figcaption>
+              )}
             </figure>
           ))}
         </div>
